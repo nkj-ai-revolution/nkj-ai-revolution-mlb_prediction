@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>MLB予測エンジン v2.0 — 2026-06-28</title>
+  <style>
+    :root {
+      --bg: #07090F;
+      --surface: #0F1320;
+      --surface2: #141824;
+      --border: #1C2438;
+      --accent: #10B981;
+      --accent2: #F97316;
+      --blue: #60A5FA;
+      --red: #F87171;
+      --text: #E2E8F0;
+      --muted: #64748B;
+      --muted2: #475569;
+      --pass-bg: #0C1018;
+      --pass-border: #1A2030;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 14px 10px 40px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    /* ─── HEADER ─── */
+    .hdr {
+      text-align: center;
+      padding: 18px 0 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+    .hdr-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.35);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .hdr-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hdr-date { font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
+    .hdr-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
+    .hdr-method { display: inline-block; margin-top: 8px; font-size: 10px; color: var(--muted2); background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; }
+
+    /* ─── METHOD BOX ─── */
+    .method-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .method-box .title { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 5px; }
+    .method-box .formula { font-family: 'Courier New', monospace; background: var(--bg); border-radius: 3px; padding: 2px 5px; color: var(--text); font-size: 10px; }
+
+    /* ─── SUMMARY STRIP ─── */
+    .summary {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 6px;
+      margin-bottom: 14px;
+    }
+    .sum-cell {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 8px 6px; text-align: center;
+    }
+    .sum-num { font-size: 20px; font-weight: 800; }
+    .sum-lbl { font-size: 9px; color: var(--muted); margin-top: 2px; }
+    .sum-cell.s .sum-num { color: var(--accent2); }
+    .sum-cell.a .sum-num { color: var(--accent); }
+    .sum-cell.b .sum-num { color: var(--blue); }
+    .sum-cell.pass .sum-num { color: var(--muted); }
+
+    /* ─── SECTION TITLE ─── */
+    .sec-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 5px 0 5px;
+      border-bottom: 1px solid var(--border);
+      margin: 16px 0 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sec-title .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .dot-orange { background: var(--accent2); }
+    .dot-green { background: var(--accent); }
+    .dot-blue { background: var(--blue); }
+    .dot-gray { background: var(--muted); }
+
+    /* ─── GAME CARD ─── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 12px 10px;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+    }
+    .card.grade-s::before { background: linear-gradient(90deg, var(--accent2), #FBBF24); }
+    .card.grade-a::before { background: var(--accent); }
+    .card.grade-b::before { background: var(--blue); }
+
+    /* card top row */
+    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
+    .card-time { font-size: 10px; color: var(--muted); }
+    .grade-chip {
+      font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 5px;
+      letter-spacing: 0.04em;
+    }
+    .chip-s { background: rgba(249,115,22,0.15); color: var(--accent2); border: 1px solid rgba(249,115,22,0.35); }
+    .chip-a { background: rgba(16,185,129,0.15); color: var(--accent); border: 1px solid rgba(16,185,129,0.35); }
+    .chip-b { background: rgba(96,165,250,0.12); color: var(--blue); border: 1px solid rgba(96,165,250,0.3); }
+
+    /* teams row */
+    .teams { display: flex; align-items: center; gap: 6px; margin-bottom: 9px; }
+    .team-blk { flex: 1; }
+    .team-name { font-size: 16px; font-weight: 800; line-height: 1.1; }
+    .team-name.winner { color: var(--accent2); }
+    .team-name.loser { color: var(--muted2); }
+    .team-role { font-size: 9px; color: var(--muted); margin-top: 1px; }
+    .team-pitcher { font-size: 10px; color: var(--muted); }
+    .vs-sep { font-size: 11px; font-weight: 700; color: var(--border); flex-shrink: 0; }
+    .right-blk { text-align: right; }
+
+    /* probability display */
+    .prob-display { text-align: center; margin-bottom: 8px; }
+    .prob-big { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
+    .prob-big.s { color: var(--accent2); }
+    .prob-big.a { color: var(--accent); }
+    .prob-big.b { color: var(--blue); }
+    .prob-lbl { font-size: 9px; color: var(--muted); margin-top: -2px; }
+
+    /* prob bar */
+    .prob-bar-wrap { margin-bottom: 8px; }
+    .prob-bar-labels {
+      display: flex; justify-content: space-between;
+      font-size: 10px; font-weight: 700; margin-bottom: 3px;
+    }
+    .lbl-winner { color: var(--accent2); }
+    .lbl-loser { color: var(--muted); }
+    .prob-bar {
+      height: 5px; background: var(--border);
+      border-radius: 3px; overflow: hidden;
+    }
+    .prob-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent2), #FBBF24);
+    }
+    .prob-fill.a { background: var(--accent); }
+    .prob-fill.b { background: var(--blue); }
+
+    /* calc breakdown */
+    .calc {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 9px;
+      margin-bottom: 7px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 1.5px 0; }
+    .calc-key { color: var(--muted); }
+    .calc-val { font-weight: 700; color: var(--text); font-family: 'Courier New', monospace; font-size: 10px; }
+    .calc-arrow { color: var(--border); }
+    .calc-divider { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+    .calc-final { color: var(--accent2) !important; font-size: 11px !important; }
+
+    /* factors */
+    .factors { list-style: none; border-top: 1px solid var(--border); padding-top: 6px; }
+    .factors li {
+      font-size: 10px; color: var(--muted);
+      padding: 1px 0 1px 11px; position: relative;
+    }
+    .factors li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .hl { color: var(--text); font-weight: 600; }
+    .pos { color: #86EFAC; }
+    .neg { color: #FCA5A5; }
+    .neu { color: var(--muted); }
+
+    /* ─── PASS SECTION ─── */
+    .pass-card {
+      background: var(--pass-bg);
+      border: 1px solid var(--pass-border);
+      border-radius: 8px;
+      padding: 9px 11px;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pass-icon { font-size: 14px; flex-shrink: 0; opacity: 0.5; }
+    .pass-body { flex: 1; }
+    .pass-teams { font-size: 12px; font-weight: 700; color: var(--muted2); }
+    .pass-detail { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .pass-prob { font-size: 13px; font-weight: 800; color: var(--muted); white-space: nowrap; }
+    .pass-badge {
+      display: inline-block; background: rgba(100,116,139,0.1);
+      border: 1px solid var(--border); border-radius: 3px;
+      font-size: 9px; color: var(--muted); padding: 0px 5px;
+      font-weight: 700; margin-left: 5px;
+    }
+
+    /* ─── GRADE LEGEND ─── */
+    .legend {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 6px;
+      margin-bottom: 14px;
+    }
+    .leg-cell {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 7px 8px; text-align: center;
+    }
+    .leg-grade { font-size: 16px; font-weight: 900; }
+    .leg-range { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .leg-desc { font-size: 9px; color: var(--muted2); margin-top: 2px; }
+    .leg-s .leg-grade { color: var(--accent2); }
+    .leg-a .leg-grade { color: var(--accent); }
+    .leg-b .leg-grade { color: var(--blue); }
+
+    /* ─── FOOTER ─── */
+    .disclaimer {
+      margin-top: 20px; padding: 10px 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 10px; color: var(--muted); line-height: 1.6;
+    }
+    .disclaimer .warn { color: var(--red); font-weight: 700; }
+    .version-note {
+      margin-top: 10px; padding: 8px 12px;
+      background: rgba(16,185,129,0.05);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px; font-size: 10px; color: var(--muted); line-height: 1.6;
+    }
+    .version-note strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="hdr">
+  <div class="hdr-badge"><span class="hdr-dot"></span>MLB予測エンジン v2.0</div>
+  <div class="hdr-date">2026-06-28</div>
+  <div class="hdr-sub">日曜日 / 15試合 / ピタゴラス+Log5方式</div>
+  <div class="hdr-method">算出: Pythagorean Win% → Log5 → ホーム補正 → 先発補正</div>
+</div>
+
+<!-- ═══ METHOD ═══ -->
+<div class="method-box">
+  <div class="title">▸ v2の予測ロジック（完全透明化）</div>
+  ① <span class="formula">PW% = RS² / (RS² + RA²)</span> でチーム実力を算出（単純勝率より精度高）<br>
+  ② <span class="formula">Log5(A,B) = A(1-B) / [A(1-B) + B(1-A)]</span> で中立地確率を計算<br>
+  ③ ホームアドバンテージ <span class="formula">+4%</span> を加算<br>
+  ④ 先発ERA差が1.0超の場合のみ ±3% 補正<br>
+  ⑤ <strong style="color:#F97316">58%未満は PASS</strong>（コインフリップ帯では賭けない）<br>
+  ⑥ 上限 <strong style="color:#F97316">65%</strong> 厳守（例外なし）
+</div>
+
+<!-- ═══ SUMMARY ═══ -->
+<div class="summary">
+  <div class="sum-cell s"><div class="sum-num">5</div><div class="sum-lbl">Grade S<br>63〜65%</div></div>
+  <div class="sum-cell a"><div class="sum-num">3</div><div class="sum-lbl">Grade A<br>60〜62%</div></div>
+  <div class="sum-cell b"><div class="sum-num">1</div><div class="sum-lbl">Grade B<br>58〜59%</div></div>
+  <div class="sum-cell pass"><div class="sum-num">6</div><div class="sum-lbl">PASS<br>58%未満</div></div>
+</div>
+
+<!-- ═══ GRADE LEGEND ═══ -->
+<div class="legend">
+  <div class="leg-cell leg-s"><div class="leg-grade">S</div><div class="leg-range">63〜65%</div><div class="leg-desc">強いエッジ<br>推奨</div></div>
+  <div class="leg-cell leg-a"><div class="leg-grade">A</div><div class="leg-range">60〜62%</div><div class="leg-desc">明確なエッジ<br>推奨</div></div>
+  <div class="leg-cell leg-b"><div class="leg-grade">B</div><div class="leg-range">58〜59%</div><div class="leg-desc">小エッジ<br>参考</div></div>
+</div>
+
+<!-- ═══ GRADE S PICKS ═══ -->
+<div class="sec-title"><span class="dot dot-orange"></span>Grade S — 強エッジ（5試合）</div>
+
+<!-- CWS vs KC -->
+<div class="card grade-s">
+  <div class="card-top">
+    <span class="card-time">14:10 ET / ギャランティードRF</span>
+    <span class="grade-chip chip-s">Grade S</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name winner">CWS</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name loser">KC</div>
+      <div class="team-role">ビジター</div>
+      <div class="team-pitcher">A. カイ (L)</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big s">65%</div>
+    <div class="prob-lbl">CWS 予測勝率（上限キャップ適用）</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-winner">CWS 65%</span><span class="lbl-loser">KC 35%</span></div>
+    <div class="prob-bar"><div class="prob-fill" style="width:65%"></div></div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">CWS ピタゴラス勝率</span><span class="calc-val">52.6%</span></div>
+    <div class="calc-row"><span class="calc-key">KC ピタゴラス勝率</span><span class="calc-val">39.9%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">CWS 62.6%</span></div>
+    <div class="calc-row"><span class="calc-key">ホームアドバンテージ</span><span class="calc-val">+4.0%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key calc-final">最終確率（上限65%適用）</span><span class="calc-val calc-final">65%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">PW%差 12.7pt</span> — 実力差大。CWSは2026得失点差<span class="pos">+19</span>に対しKCは<span class="neg">-71</span></li>
+    <li><span class="hl">A.カイ</span>（KC先発）ERA高め・チームの弱投手リストから起用</li>
+    <li>シーズン直接対決でCWSの地力が上回る傾向</li>
+  </ul>
+</div>
+
+<!-- MIL vs CHC -->
+<div class="card grade-s">
+  <div class="card-top">
+    <span class="card-time">14:10 ET / アメリカンファミリーF</span>
+    <span class="grade-chip chip-s">Grade S</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name winner">MIL</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name loser">CHC</div>
+      <div class="team-role">ビジター</div>
+      <div class="team-pitcher">V. ベラスケス (R)</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big s">65%</div>
+    <div class="prob-lbl">MIL 予測勝率（上限キャップ適用）</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-winner">MIL 65%</span><span class="lbl-loser">CHC 35%</span></div>
+    <div class="prob-bar"><div class="prob-fill" style="width:65%"></div></div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">MIL ピタゴラス勝率</span><span class="calc-val">67.3%</span></div>
+    <div class="calc-row"><span class="calc-key">CHC ピタゴラス勝率</span><span class="calc-val">54.5%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">MIL 63.2%</span></div>
+    <div class="calc-row"><span class="calc-key">ホームアドバンテージ</span><span class="calc-val">+4.0%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key calc-final">最終確率（上限65%適用）</span><span class="calc-val calc-final">65%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">MILはMLB2位</span>の戦力(得失点差<span class="pos">+127</span>)。PW% 67.3%はNL最高水準</li>
+    <li><span class="hl">V.ベラスケス</span>（CHC）ジャーニーマン起用 — ERA 5.0超の可能性高</li>
+    <li>MIL本拠地（アメリカンファミリーF）はピッチャーズパーク傾向</li>
+  </ul>
+</div>
+
+<!-- ATL @ SF -->
+<div class="card grade-s">
+  <div class="card-top">
+    <span class="card-time">16:05 ET / オラクルP</span>
+    <span class="grade-chip chip-s">Grade S</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name loser">SF</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name winner">ATL</div>
+      <div class="team-role">ビジター <span style="color:#10B981;font-size:9px">★予測推奨</span></div>
+      <div class="team-pitcher">C. セール (L) ERA 3.19</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big s">65%</div>
+    <div class="prob-lbl">ATL 予測勝率（ビジター推奨 / 上限適用）</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-loser">SF 35%</span><span class="lbl-winner">ATL 65%</span></div>
+    <div class="prob-bar">
+      <div style="display:flex;height:5px;">
+        <div style="width:35%;background:var(--border);border-radius:3px 0 0 3px;"></div>
+        <div class="prob-fill" style="width:65%;border-radius:0 3px 3px 0;margin:0;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">ATL ピタゴラス勝率</span><span class="calc-val">62.8%</span></div>
+    <div class="calc-row"><span class="calc-key">SF ピタゴラス勝率</span><span class="calc-val">42.4%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">ATL 69.6%</span></div>
+    <div class="calc-row"><span class="calc-key">SF ホームアドバンテージ</span><span class="calc-val">+4.0% → SF</span></div>
+    <div class="calc-row"><span class="calc-key">SFホーム補正後ATL確率</span><span class="calc-val">65.6%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key calc-final">最終確率（上限65%適用）</span><span class="calc-val calc-final">65%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">ATL得失点差+94</span>（NL2位）vsSF<span class="neg">-56</span> — 実力差は歴然</li>
+    <li><span class="hl">C.セール</span>(ATL) ERA 3.19・WHIP 1.19 — エース級が登板</li>
+    <li>ホーム補正後でも65.6%→ SF主場でも ATL優位が揺らがない</li>
+  </ul>
+</div>
+
+<!-- LAD @ SD -->
+<div class="card grade-s">
+  <div class="card-top">
+    <span class="card-time">16:10 ET / ペトコパーク</span>
+    <span class="grade-chip chip-s">Grade S</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name loser">SD</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name winner">LAD</div>
+      <div class="team-role">ビジター <span style="color:#10B981;font-size:9px">★予測推奨</span></div>
+      <div class="team-pitcher">E. シーハン (R)</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big s">64%</div>
+    <div class="prob-lbl">LAD 予測勝率（ビジター推奨）</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-loser">SD 36%</span><span class="lbl-winner">LAD 64%</span></div>
+    <div class="prob-bar">
+      <div style="display:flex;height:5px;">
+        <div style="width:36%;background:var(--border);border-radius:3px 0 0 3px;"></div>
+        <div class="prob-fill" style="width:64%;border-radius:0 3px 3px 0;margin:0;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">LAD ピタゴラス勝率</span><span class="calc-val">68.0%</span></div>
+    <div class="calc-row"><span class="calc-key">SD ピタゴラス勝率</span><span class="calc-val">50.1%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">LAD 67.9%</span></div>
+    <div class="calc-row"><span class="calc-key">SD ホームアドバンテージ</span><span class="calc-val">+4.0% → SD</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key calc-final">最終確率</span><span class="calc-val calc-final">64%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">LADはMLBトップ</span>のチーム力（得失点差<span class="pos">+138</span>・PW% 68.0%）</li>
+    <li>ペトコパーク(SD)のホーム補正後も64% — チーム差が圧倒的</li>
+    <li>SD先発未確定→不確実性あり。LAD優位の質は揺らがない</li>
+  </ul>
+</div>
+
+<!-- PIT vs CIN -->
+<div class="card grade-s">
+  <div class="card-top">
+    <span class="card-time">13:35 ET / PNCパーク</span>
+    <span class="grade-chip chip-s">Grade S</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name winner">PIT</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">M. ケラー (R) ERA 4.89</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name loser">CIN</div>
+      <div class="team-role">ビジター</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big s">63%</div>
+    <div class="prob-lbl">PIT 予測勝率</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-winner">PIT 63%</span><span class="lbl-loser">CIN 37%</span></div>
+    <div class="prob-bar"><div class="prob-fill" style="width:63%"></div></div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">PIT ピタゴラス勝率</span><span class="calc-val">53.1%</span></div>
+    <div class="calc-row"><span class="calc-key">CIN ピタゴラス勝率</span><span class="calc-val">43.7%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">PIT 59.3%</span></div>
+    <div class="calc-row"><span class="calc-key">ホームアドバンテージ</span><span class="calc-val">+4.0%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key calc-final">最終確率</span><span class="calc-val calc-final">63%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">PIT PW% 53.1% vs CIN 43.7%</span> — チーム力差9.4pt。得失点差はPIT<span class="pos">+23</span>・CIN<span class="neg">-46</span></li>
+    <li>M.ケラー ERA 4.89 は平均的。先発補正なし（CIN先発次第で変動あり）</li>
+    <li>PNCパーク（ピッチャーズパーク）はビジター打線を抑制</li>
+  </ul>
+</div>
+
+<!-- ═══ GRADE A PICKS ═══ -->
+<div class="sec-title"><span class="dot dot-green"></span>Grade A — 明確エッジ（3試合）</div>
+
+<!-- TB vs ARI -->
+<div class="card grade-a">
+  <div class="card-top">
+    <span class="card-time">13:40 ET / トロピカーナF</span>
+    <span class="grade-chip chip-a">Grade A</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name winner">TB</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">D. ラスマッセン ERA 2.62</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name loser">ARI</div>
+      <div class="team-role">ビジター</div>
+      <div class="team-pitcher">M. ケリー ERA 3.52</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big a">62%</div>
+    <div class="prob-lbl">TB 予測勝率</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-winner" style="color:var(--accent)">TB 62%</span><span class="lbl-loser">ARI 38%</span></div>
+    <div class="prob-bar"><div class="prob-fill a" style="width:62%"></div></div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">TB ピタゴラス勝率</span><span class="calc-val">52.8%</span></div>
+    <div class="calc-row"><span class="calc-key">ARI ピタゴラス勝率</span><span class="calc-val">46.4%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">TB 56.4%</span></div>
+    <div class="calc-row"><span class="calc-key">ホームアドバンテージ</span><span class="calc-val">+4.0%</span></div>
+    <div class="calc-row"><span class="calc-key">先発ERA補正（ラスマッセン優位）</span><span class="calc-val">+2.0%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key" style="color:var(--accent)">最終確率</span><span class="calc-val" style="color:var(--accent)">62%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">D.ラスマッセン</span> ERA <span class="pos">2.62</span>・WHIP 1.00 vs ケリー ERA 3.52 — 先発1.0差でTB有利</li>
+    <li>TB PW% 52.8%・ホーム補正・先発優位 — 三重の追い風</li>
+    <li>ARI得失点差<span class="neg">-27</span>。チーム力でも差あり</li>
+  </ul>
+</div>
+
+<!-- MIN vs COL -->
+<div class="card grade-a">
+  <div class="card-top">
+    <span class="card-time">14:10 ET / ターゲットF</span>
+    <span class="grade-chip chip-a">Grade A</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name winner">MIN</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name loser">COL</div>
+      <div class="team-role">ビジター</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big a">62%</div>
+    <div class="prob-lbl">MIN 予測勝率</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-winner" style="color:var(--accent)">MIN 62%</span><span class="lbl-loser">COL 38%</span></div>
+    <div class="prob-bar"><div class="prob-fill a" style="width:62%"></div></div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">MIN ピタゴラス勝率</span><span class="calc-val">46.1%</span></div>
+    <div class="calc-row"><span class="calc-key">COL ピタゴラス勝率</span><span class="calc-val">37.9%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">MIN 58.4%</span></div>
+    <div class="calc-row"><span class="calc-key">ホームアドバンテージ</span><span class="calc-val">+4.0%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key" style="color:var(--accent)">最終確率</span><span class="calc-val" style="color:var(--accent)">62%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">COL PW% 37.9%</span>はML最弱圏。得失点差<span class="neg">-91</span>（実質崩壊レベル）</li>
+    <li>クアーズを離れると COL 打線は大幅に低下（パークファクター依存）</li>
+    <li>MIN ターゲットFはピッチャーズバランス球場 — 中立補正なし</li>
+  </ul>
+</div>
+
+<!-- PHI vs NYM -->
+<div class="card grade-a">
+  <div class="card-top">
+    <span class="card-time">13:40 ET / シチズンズバンクP</span>
+    <span class="grade-chip chip-a">Grade A</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name winner">PHI</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name loser">NYM</div>
+      <div class="team-role">ビジター</div>
+      <div class="team-pitcher">T. マイヤーズ (R)</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big a">60%</div>
+    <div class="prob-lbl">PHI 予測勝率</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-winner" style="color:var(--accent)">PHI 60%</span><span class="lbl-loser">NYM 40%</span></div>
+    <div class="prob-bar"><div class="prob-fill a" style="width:60%"></div></div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">PHI ピタゴラス勝率</span><span class="calc-val">50.1%</span></div>
+    <div class="calc-row"><span class="calc-key">NYM ピタゴラス勝率</span><span class="calc-val">44.1%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">PHI 56.0%</span></div>
+    <div class="calc-row"><span class="calc-key">ホームアドバンテージ</span><span class="calc-val">+4.0%</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key" style="color:var(--accent)">最終確率</span><span class="calc-val" style="color:var(--accent)">60%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">NYM得失点差-44</span> — 実態は49勝チームに見えない苦しい内容</li>
+    <li>PHIホーム（シチズンズバンクP）は打者有利球場だが先発次第</li>
+    <li>T.マイヤーズ（NYM）は元TB所属。MLB平均以下の可能性残る</li>
+  </ul>
+</div>
+
+<!-- ═══ GRADE B PICKS ═══ -->
+<div class="sec-title"><span class="dot dot-blue"></span>Grade B — 小エッジ（1試合）</div>
+
+<!-- NYY @ BOS -->
+<div class="card grade-b">
+  <div class="card-top">
+    <span class="card-time">19:20 ET / フェンウェイP</span>
+    <span class="grade-chip chip-b">Grade B</span>
+  </div>
+  <div class="teams">
+    <div class="team-blk">
+      <div class="team-name loser">BOS</div>
+      <div class="team-role">ホーム</div>
+      <div class="team-pitcher">先発: 未確定</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="team-blk right-blk">
+      <div class="team-name winner">NYY</div>
+      <div class="team-role">ビジター <span style="color:#60A5FA;font-size:9px">★予測推奨</span></div>
+      <div class="team-pitcher">C. ロドン (L) ERA 3.70</div>
+    </div>
+  </div>
+  <div class="prob-display">
+    <div class="prob-big b">59%</div>
+    <div class="prob-lbl">NYY 予測勝率（ビジター推奨）</div>
+  </div>
+  <div class="prob-bar-wrap">
+    <div class="prob-bar-labels"><span class="lbl-loser">BOS 41%</span><span class="lbl-winner" style="color:var(--blue)">NYY 59%</span></div>
+    <div class="prob-bar">
+      <div style="display:flex;height:5px;">
+        <div style="width:41%;background:var(--border);border-radius:3px 0 0 3px;"></div>
+        <div class="prob-fill b" style="width:59%;border-radius:0 3px 3px 0;margin:0;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span class="calc-key">NYY ピタゴラス勝率</span><span class="calc-val">63.6%</span></div>
+    <div class="calc-row"><span class="calc-key">BOS ピタゴラス勝率</span><span class="calc-val">50.5%</span></div>
+    <div class="calc-row"><span class="calc-key">Log5 中立地確率</span><span class="calc-val">NYY 63.1%</span></div>
+    <div class="calc-row"><span class="calc-key">BOS ホームアドバンテージ</span><span class="calc-val">+4.0% → BOS</span></div>
+    <hr class="calc-divider">
+    <div class="calc-row"><span class="calc-key" style="color:var(--blue)">最終確率（NYY）</span><span class="calc-val" style="color:var(--blue)">59%</span></div>
+  </div>
+  <ul class="factors">
+    <li><span class="hl">NYY PW% 63.6%</span> vs BOS 50.5% — 実力差は大きいがフェンウェイが圧縮</li>
+    <li><span class="hl">C.ロドン</span> ERA 3.70 / WHIP 1.25 — エース格が登板</li>
+    <li>Grade B: フェンウェイのホーム補正で優位は縮小。参考程度に</li>
+  </ul>
+</div>
+
+<!-- ═══ PASS ═══ -->
+<div class="sec-title"><span class="dot dot-gray"></span>PASS — エッジなし（6試合 / 58%未満は推奨しない）</div>
+
+<div class="pass-card">
+  <div class="pass-icon">⊘</div>
+  <div class="pass-body">
+    <div class="pass-teams">BAL <span style="color:var(--muted2)">vs</span> WSH <span class="pass-badge">PASS</span></div>
+    <div class="pass-detail">13:35 ET / カムデンヤーズ | WSH先発: K.ブラッドシュ</div>
+  </div>
+  <div class="pass-prob">BAL 51%</div>
+</div>
+
+<div class="pass-card">
+  <div class="pass-icon">⊘</div>
+  <div class="pass-body">
+    <div class="pass-teams">TOR <span style="color:var(--muted2)">vs</span> TEX <span class="pass-badge">PASS</span></div>
+    <div class="pass-detail">13:37 ET / ロジャースC | TEX先発: S.ビーバー</div>
+  </div>
+  <div class="pass-prob">TOR 51%</div>
+</div>
+
+<div class="pass-card">
+  <div class="pass-icon">⊘</div>
+  <div class="pass-body">
+    <div class="pass-teams">DET <span style="color:var(--muted2)">vs</span> HOU <span class="pass-badge">PASS</span></div>
+    <div class="pass-detail">13:40 ET / コメリカP | HOU先発: J.フラハーティ | DET 60%→先発補正→57%</div>
+  </div>
+  <div class="pass-prob">DET 57%</div>
+</div>
+
+<div class="pass-card">
+  <div class="pass-icon">⊘</div>
+  <div class="pass-body">
+    <div class="pass-teams">SEA <span style="color:var(--muted2)">vs</span> CLE <span class="pass-badge">PASS</span></div>
+    <div class="pass-detail">13:40 ET / T-モバイルP | CLE先発: G.ウィリアムズ</div>
+  </div>
+  <div class="pass-prob">SEA 56%</div>
+</div>
+
+<div class="pass-card">
+  <div class="pass-icon">⊘</div>
+  <div class="pass-body">
+    <div class="pass-teams">STL <span style="color:var(--muted2)">vs</span> MIA <span class="pass-badge">PASS</span></div>
+    <div class="pass-detail">14:15 ET / ブッシュスタジアム | MIA先発: T.フィリップス</div>
+  </div>
+  <div class="pass-prob">STL 52%</div>
+</div>
+
+<div class="pass-card">
+  <div class="pass-icon">⊘</div>
+  <div class="pass-body">
+    <div class="pass-teams">LAA <span style="color:var(--muted2)">vs</span> ATH <span class="pass-badge">PASS</span></div>
+    <div class="pass-detail">15:15 ET / エンゼルスタジアム | ATH先発: A.シバレ</div>
+  </div>
+  <div class="pass-prob">LAA 55%</div>
+</div>
+
+<!-- ═══ VERSION NOTE ═══ -->
+<div class="version-note">
+  <strong>▸ v2との比較ポイント</strong><br>
+  現行ツール(v1)との主な違い: ①チーム力をW-Lでなく<strong>ピタゴラス勝率</strong>で評価 ②<strong>58%未満はPASS</strong>（v1のGrade Cに相当する帯が最大の敗因） ③計算を全て公開・先発補正は確認済みデータのみ使用 ④上限65%に厳格化（v1の70%容認を廃止）。<br><br>
+  v1累積成績: 52.1%（71試合） / Grade C的中率: <strong>44.4%（ランダム以下）</strong><br>
+  v2目標: Grade S/A帯の的中率60%以上・Grade B帯55%以上
+</div>
+
+<!-- ═══ DISCLAIMER ═══ -->
+<div class="disclaimer">
+  <span class="warn">⚠ 重要免責事項</span><br>
+  本ページはMLB試合の統計的分析を学習・検証目的で提供するものです。<strong>スポーツ賭博・オンラインカジノ等への利用を一切禁止します。</strong>野球の結果は確率的事象であり、いかなる予測も勝利を保証しません。賭博は依存症・多重債務等の重大な社会問題を引き起こす可能性があります。予測結果の利用はご自身の責任において行ってください。
+</div>
+
+</body>
+</html>
