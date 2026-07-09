@@ -63,3 +63,237 @@
 
 | 日付 | 試合 | 予測side | 勝率% | グレード | 的中 |
 |---|---|---|---|---|---|
+| 2026-06-08 | NYY v BOS | NYY | 62 | B | ○ |
+| 2026-06-08 | LAD v SF | LAD | 61 | B | × |
+| 2026-06-08 | HOU v TEX | HOU | 60 | B | ○ |
+| 2026-06-08 | CHC v STL | CHC | 54 | C | × |
+| 2026-06-09 | PHI v NYM | PHI | 63 | B | ○ |
+| 2026-06-09 | MIN v CLE | MIN | 59 | B | × |
+| 2026-06-10 | LAD v SD | LAD | 62 | B | ○ |
+| 2026-06-10 | NYY v TOR | NYY | 60 | B | × |
+| 2026-06-10 | HOU v OAK | HOU | 55 | C | ○ |
+| 2026-06-12 | PHI v ATL | PHI | 61 | B | ○ |
+| 2026-06-15 | LAD v ARI | LAD | 63 | B | ○ |
+| 2026-06-15 | NYM v WSH | NYM | 54 | C | × |
+| 2026-06-17 | HOU v SEA | HOU | 60 | B | ○ |
+| 2026-06-19 | LAD v SF | LAD | 62 | B | × |
+| 2026-06-19 | NYY v BOS | NYY | 59 | B | ○ |
+| 2026-06-19 | CHC v MIL | CHC | 57 | C | — |
+| 2026-06-19 | ATL v NYM | ATL | 58 | B | × |
+| 2026-06-21 | LAD v SF | LAD | 62 | B | ○ |
+| 2026-06-21 | HOU v TEX | HOU | 61 | B | ○ |
+| 2026-06-21 | NYY v BOS | NYY | 59 | B | ○ |
+| 2026-06-21 | ATL v NYM | ATL | 58 | B | × |
+| 2026-06-22 | NYY v DET | NYY | 65 | B | × |
+| 2026-06-22 | TB v KC | TB | 65 | B | × |
+| 2026-06-22 | LAD v MIN | LAD | 61 | B | ○ |
+| 2026-06-22 | CHC v NYM | CHC | 60 | B | ○ |
+| 2026-06-22 | MIA v TEX | MIA | 60 | B | × |
+| 2026-06-22 | ATL v SD | ATL | 59 | B | × |
+| 2026-06-22 | WSH v PHI | WSH | 57 | C | ○ |
+| 2026-06-22 | HOU v TOR | HOU | 55 | C | × |
+| 2026-06-22 | MIL v CIN | MIL | 55 | C | ○ |
+| 2026-06-22 | STL v ARI | STL | 55 | C | ○ |
+| 2026-06-22 | BAL v LAA | BAL | 55 | C | ○ |
+| 2026-06-22 | CLE v CWS | CLE | 52 | C | × |
+| 2026-06-22 | COL v BOS | COL | 52 | C | ○ |
+| 2026-06-24 | TB - KC | TB | 65 | B | × |
+| 2026-06-24 | MIN - LAD | LAD | 65 | B | ○ |
+| 2026-06-24 | CIN - MIL | MIL | 62 | B | ○ |
+| 2026-06-24 | DET - NYY | NYY | 60 | B | ○ |
+| 2026-06-24 | STL - ARI | STL | 55 | C | × |
+| 2026-06-24 | COL - BOS | BOS | 55 | C | ○ |
+| 2026-06-24 | WSH - PHI | PHI | 55 | C | ○ |
+| 2026-06-24 | TOR - HOU | TOR | 55 | C | × |
+| 2026-06-24 | CWS - CLE | CWS | 54 | C | ○ |
+| 2026-06-24 | SF - OAK | OAK | 55 | C | × |
+| 2026-06-24 | LAA - BAL | BAL | 55 | C | ○ |
+| 2026-06-24 | PIT - SEA | SEA | 53 | C | ○ |
+| 2026-06-24 | MIA - TEX | TEX | 52 | C | × |
+| 2026-06-24 | NYM - CHC | CHC | 55 | C | ○ |
+| 2026-06-24 | SD - ATL | ATL | 57 | C | × |
+| 2026-06-25 | KC - TB | TB | 60 | B | ○ |
+| 2026-06-25 | SEA - PIT | SEA | 56 | C | × |
+| 2026-06-25 | OAK - SF | OAK | 54 | C | × |
+| 2026-06-25 | HOU - DET | DET | 53 | C | × |
+| 2026-06-25 | PHI - WSH | PHI | 60 | B | ○ |
+| 2026-06-25 | TEX - TOR | TOR | 53 | C | × |
+| 2026-06-25 | CHC - NYM | CHC | 55 | C | ○ |
+| 2026-06-25 | NYY - BOS | NYY | 63 | B | × |
+| 2026-06-25 | ARI - STL | STL | 53 | C | 中止 |
+| 2026-06-26 | ARI - TB | TB | 63 | B | ○ |
+| 2026-06-26 | NYY - BOS | NYY | 61 | B | × |
+| 2026-06-26 | KC - CWS | CWS | 60 | B | ○ |
+| 2026-06-26 | COL - MIN | MIN | 59 | B | ○ |
+| 2026-06-26 | CIN - PIT | PIT | 58 | B | × |
+| 2026-06-26 | CHC - MIL | MIL | 55 | C | ○ |
+| 2026-06-26 | SF - ATL | ATL | 55 | C | ○ |
+| 2026-06-26 | PHI - NYM | PHI | 55 | C | ○ |
+| 2026-06-26 | BAL - WSH | WSH | 55 | C | × |
+| 2026-06-26 | CLE - SEA | CLE | 53 | C | × |
+| 2026-06-26 | TEX - TOR | TOR | 53 | C | × |
+| 2026-06-26 | HOU - DET | HOU | 53 | C | × |
+| 2026-06-26 | STL - MIA | STL | 52 | C | × |
+| 2026-06-26 | OAK - LAA | LAA | 51 | C | × |
+| 2026-06-26 | LAD - SD | LAD | 51 | C | × |
+| 2026-06-28 | ATL@SF | ATL | 70 | A | × |
+| 2026-06-28 | CHC@MIL | MIL | 62 | B | × |
+| 2026-06-28 | PHI@NYM | PHI | 61 | B | × |
+| 2026-06-28 | MIN@COL | MIN | 60 | B | ○ |
+| 2026-06-28 | NYY@BOS | NYY | 59 | B | × |
+| 2026-06-28 | HOU@DET | HOU | 57 | C | ○ |
+| 2026-06-28 | LAD@SD | LAD | 57 | C | ○ |
+| 2026-06-28 | TB@ARI | TB | 55 | C | ○ |
+| 2026-06-28 | CWS@KC | CWS | 55 | C | × |
+| 2026-06-28 | TEX@TOR | TEX | 55 | C | ○ |
+| 2026-06-28 | ATH@LAA | ATH | 55 | C | × |
+| 2026-06-28 | WSH@BAL | BAL | 53 | C | × |
+| 2026-06-28 | SEA@CLE | CLE | 53 | C | ○ |
+| 2026-06-28 | MIA@STL | MIA | 51 | C | ○ |
+| 2026-06-28 | CIN@PIT | PIT | 51 | C | ○ |
+| 2026-06-29 | DET@NYY | NYY | 65 | B | × |
+| 2026-06-29 | LAA@SEA | SEA | 60 | B | ○ |
+| 2026-06-29 | CIN@MIL | MIL | 57 | C | ○ |
+| 2026-06-29 | MIN@HOU | HOU | 57 | C | × |
+| 2026-06-29 | PIT@PHI | PHI | 57 | C | × |
+| 2026-06-29 | SF@ARI | ARI | 57 | C | ○ |
+| 2026-06-29 | MIA@COL | MIA | 57 | C | ○ |
+| 2026-06-29 | LAD@ATH | LAD | 57 | C | ○ |
+| 2026-06-29 | SD@CHC | CHC | 55 | C | ○ |
+| 2026-06-29 | TEX@CLE | CLE | 54 | C | × |
+| 2026-06-29 | CWS@BAL | CWS | 53 | C | ○ |
+| 2026-06-29 | WSH@BOS | WSH | 53 | C | × |
+| 2026-06-29 | NYM@TOR | TOR | 52 | C | ○ |
+| 2026-06-30 | DET@NYY | NYY | 63 | B | × |
+| 2026-06-30 | PIT@PHI | PHI | 62 | B | ○ |
+| 2026-06-30 | STL@ATL | ATL | 62 | B | × |
+| 2026-06-30 | LAA@SEA | SEA | 59 | B | ○ |
+| 2026-06-30 | TB@KC | TB | 57 | C | ○ |
+| 2026-06-30 | CIN@MIL | MIL | 57 | C | ○ |
+| 2026-06-30 | LAD@ATH | LAD | 57 | C | ○ |
+| 2026-06-30 | TEX@CLE | CLE | 55 | C | × |
+| 2026-06-30 | SD@CHC | CHC | 55 | C | ○ |
+| 2026-06-30 | SF@ARI | ARI | 55 | C | ○ |
+| 2026-06-30 | MIA@COL | MIA | 54 | C | ○ |
+| 2026-06-30 | MIN@HOU | HOU | 53 | C | ○ |
+| 2026-06-30 | CWS@BAL | CWS | 52 | C | ○ |
+| 2026-06-30 | NYM@TOR | TOR | 52 | C | × |
+| 2026-06-30 | WSH@BOS | WSH | 52 | C | ○ |
+| 2026-07-01 | DET@NYY | NYY | 60 | B | × |
+| 2026-07-01 | PIT@PHI | PHI | 57 | C | ○ |
+| 2026-07-01 | STL@ATL | ATL | 57 | C | ○ |
+| 2026-07-01 | MIN@HOU | HOU | 56 | C | × |
+| 2026-07-01 | TB@KC | TB | 55 | C | ○ |
+| 2026-07-01 | CIN@MIL | MIL | 55 | C | ○ |
+| 2026-07-01 | MIA@COL | MIA | 55 | C | × |
+| 2026-07-01 | LAD@ATH | LAD | 55 | C | × |
+| 2026-07-01 | TEX@CLE | CLE | 54 | C | ○ |
+| 2026-07-01 | NYM@TOR | TOR | 53 | C | ○ |
+| 2026-07-01 | SF@ARI | SF | 53 | C | ○ |
+| 2026-07-01 | CWS@BAL | CWS | 53 | C | × |
+| 2026-07-01 | SD@CHC | SD | 52 | C | × |
+| 2026-07-01 | WSH@BOS | BOS | 51 | C | × |
+| 2026-07-02 | CIN@MIL | MIL | 65 | B | × |
+| 2026-07-02 | LAA@SEA | SEA | 60 | B | ○ |
+| 2026-07-02 | TB@KC | TB | 57 | C | ○ |
+| 2026-07-02 | STL@ATL | ATL | 55 | C | × |
+| 2026-07-02 | CWS@CLE | CWS | 55 | C | × |
+| 2026-07-02 | PIT@PHI | PHI | 55 | C | × |
+| 2026-07-02 | MIA@COL | MIA | 55 | C | × |
+| 2026-07-02 | DET@TEX | TEX | 55 | C | ○ |
+| 2026-07-02 | SD@LAD | LAD | 55 | C | ○ |
+| 2026-07-03 | SD@LAD | LAD | 65 | B | ○ |
+| 2026-07-03 | TB@HOU | TB | 60 | B | ○ |
+| 2026-07-03 | MIL@AZ | MIL | 58 | B | ○ |
+| 2026-07-03 | STL@CHC | CHC | 55 | C | × |
+| 2026-07-03 | MIN@NYY | NYY | 55 | C | ○ |
+| 2026-07-03 | BAL@CIN | BAL | 55 | C | ○ |
+| 2026-07-03 | CWS@CLE | CLE | 55 | C | ○ |
+| 2026-07-03 | NYM@ATL | ATL | 55 | C | ○ |
+| 2026-07-03 | SF@COL | SF | 54 | C | × |
+| 2026-07-03 | PIT@WSH | WSH | 53 | C | ○ |
+| 2026-07-03 | TOR@SEA | SEA | 53 | C | × |
+| 2026-07-03 | BOS@LAA | LAA | 52 | C | × |
+| 2026-07-03 | MIA@ATH | MIA | 51 | C | ○ |
+| 2026-07-04 | NYM@ATL | ATL | 65 | B | ○ |
+| 2026-07-04 | PHI@KC | PHI | 60 | B | ○ |
+| 2026-07-04 | CWS@CLE | CLE | 60 | B | × |
+| 2026-07-04 | MIN@NYY | NYY | 57 | C | × |
+| 2026-07-04 | DET@TEX | TEX | 57 | C | × |
+| 2026-07-04 | TB@HOU | TB | 57 | C | × |
+| 2026-07-04 | PIT@WSH | PIT | 55 | C | ○ |
+| 2026-07-04 | TOR@SEA | SEA | 55 | C | ○ |
+| 2026-07-04 | BAL@CIN | BAL | 54 | C | ○ |
+| 2026-07-04 | STL@CHC | CHC | 53 | C | × |
+| 2026-07-04 | SF@COL | SF | 55 | C | ○ |
+| 2026-07-04 | BOS@LAA | BOS | 55 | C | ○ |
+| 2026-07-04 | MIL@AZ | MIL | 55 | C | × |
+| 2026-07-04 | SD@LAD | LAD | 55 | C | ○ |
+| 2026-07-04 | MIA@ATH | MIA | 54 | C | ○ |
+| 2026-07-05 | NYM@ATL | ATL | 63 | B | × |
+| 2026-07-05 | PIT@WSH | WSH | 58 | B | × |
+| 2026-07-05 | CWS@CLE | CLE | 55 | C | × |
+| 2026-07-05 | BAL@CIN | BAL | 54 | C | × |
+| 2026-07-05 | MIN@NYY | NYY | 56 | C | × |
+| 2026-07-05 | PHI@KC | PHI | 55 | C | × |
+| 2026-07-05 | STL@CHC | CHC | 53 | C | ○ |
+| 2026-07-05 | DET@TEX | TEX | 53 | C | × |
+| 2026-07-05 | TB@HOU | TB | 56 | C | × |
+| 2026-07-05 | SF@COL | COL | 54 | C | ○ |
+| 2026-07-05 | MIL@ARI | MIL | 53 | C | ○ |
+| 2026-07-05 | MIA@ATH | MIA | 52 | C | ○ |
+| 2026-07-05 | TOR@SEA | SEA | 56 | C | ○ |
+| 2026-07-05 | SD@LAD | LAD | 55 | C | × |
+| 2026-07-05 | BOS@LAA | BOS | 55 | C | ○ |
+| 2026-07-06 | PHI@KC | PHI | 65 | B | × |
+| 2026-07-06 | NYY@TB | NYY | 55 | C | ○ |
+| 2026-07-06 | HOU@WSH | WSH | 55 | C | ○ |
+| 2026-07-06 | NYM@ATL | ATL | 56 | C | × |
+| 2026-07-06 | MIL@STL | MIL | 55 | C | ○ |
+| 2026-07-06 | AZ@SD | SD | 55 | C | × |
+| 2026-07-06 | TOR@SF | SF | 53 | C | ○ |
+| 2026-07-06 | COL@LAD | LAD | 55 | C | × |
+| 2026-07-07 | LAA@TEX | TEX | 65 | B | ○ |
+| 2026-07-07 | SEA@MIA | MIA | 64 | B | ○ |
+| 2026-07-07 | MIL@STL(G1) | MIL | 64 | B | ○ |
+| 2026-07-07 | ATH@DET | DET | 61 | B | ○ |
+| 2026-07-07 | ATL@PIT | PIT | 58 | B | ○ |
+| 2026-07-07 | PHI@CIN | PHI | 55 | C | ○ |
+| 2026-07-07 | HOU@WSH | WSH | 55 | C | × |
+| 2026-07-07 | TOR@SF | SF | 55 | C | × |
+| 2026-07-07 | COL@LAD | LAD | 55 | C | × |
+| 2026-07-07 | BOS@CWS | BOS | 54 | C | ○ |
+| 2026-07-07 | CHC@BAL | BAL | 53 | C | × |
+| 2026-07-07 | KC@NYM | NYM | 53 | C | × |
+| 2026-07-07 | MIL@STL(G2) | STL | 52 | C | × |
+| 2026-07-07 | CLE@MIN | MIN | 52 | C | ○ |
+| 2026-07-07 | AZ@SD | AZ | 52 | C | × |
+| 2026-07-07 | NYY@TB | NYY | 51 | C | × |
+| 2026-07-08 | STL@MIL | MIL | 68 | A | × |
+| 2026-07-08 | COL@LAD | LAD | 63 | B | ○ |
+| 2026-07-08 | NYY@TB | TB | 61 | B | ○ |
+| 2026-07-08 | TOR@SF | TOR | 60 | B | ○ |
+| 2026-07-08 | LAA@TEX | TEX | 56 | C | × |
+| 2026-07-08 | HOU@WSH | WSH | 56 | C | ○ |
+| 2026-07-08 | KC@NYM | NYM | 55 | C | ○ |
+| 2026-07-08 | CHC@BAL | CHC | 55 | C | ○ |
+| 2026-07-08 | OAK@DET | DET | 55 | C | ○ |
+| 2026-07-08 | ATL@PIT | ATL | 55 | C | ○ |
+| 2026-07-08 | AZ@SD | SD | 55 | C | ○ |
+| 2026-07-08 | BOS@CWS | CWS | 54 | C | × |
+| 2026-07-08 | SEA@MIA | SEA | 52 | C | × |
+| 2026-07-08 | CLE@MIN | MIN | 51 | C | ○ |
+| 2026-07-08 | PHI@CIN | PHI | 51 | C | × |
+| 2026-07-09 | STL@MIL | MIL | 65 | B | （未） |
+| 2026-07-09 | NYY@TB | TB | 60 | B | （未） |
+| 2026-07-09 | LAA@TEX | TEX | 60 | B | （未） |
+| 2026-07-09 | SEA@MIA | SEA | 58 | B | （未） |
+| 2026-07-09 | COL@SF | SF | 56 | C | （未） |
+| 2026-07-09 | KC@NYM | NYM | 56 | C | （未） |
+| 2026-07-09 | ATL@PIT | ATL | 55 | C | （未） |
+| 2026-07-09 | CLE@MIN | CLE | 55 | C | （未） |
+| 2026-07-09 | CHC@BAL | CHC | 55 | C | （未） |
+| 2026-07-09 | ATH@DET | DET | 55 | C | （未） |
+| 2026-07-09 | PHI@CIN | PHI | 55 | C | （未） |
+| 2026-07-09 | AZ@SD | SD | 55 | C | （未） |
+| 2026-07-09 | BOS@CWS | CWS | 53 | C | （未） |
