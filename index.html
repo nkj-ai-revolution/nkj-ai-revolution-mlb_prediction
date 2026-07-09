@@ -114,9 +114,9 @@
   <div class="notice-box">
     <span style="color:#3FA66B;font-weight:700;">【7/9 朝版】</span>
     MLB公式Probable Pitchers・スコアボード（MLB Stats API）で本日13試合の予告先発を確認。<strong class="upd-neg" style="color:#fca5a5;">NYY(TB戦)・SF(COL戦)の先発投手は本更新時点で全ソース(MLB.com公式→Baseball Reference→Rotowire→ESPN)ともTBDのため「未取得」。データ欠損ルールによりグレードB上限を適用した。</strong>MIA先発は情報源間でJanson Junk/Tyler Phillipsの食い違いがあったが、MLB公式Probable Pitchers・MLB Stats API双方の一致およびPhillipsが前日7/8に同カードへ既に登板・勝利投手となった事実と整合することから<strong>Janson Junkと確定</strong>。
-    <strong>結果反映の状況:</strong> 前日7/7の残り15試合(ダブルヘッダー第2戦含む)は全試合Final確認のうえrecord.mdへ確定反映済み。7/8は本更新時点(米東部時間 夜)で15試合中<strong>4試合のみFinal</strong>（TOR@SF・ATL@PIT・SEA@MIA・NYY@TB）で、残り11試合は進行中/開始前のため次回更新で確定反映する。
+    <strong>結果反映の状況:</strong> 前日7/7の残り15試合(ダブルヘッダー第2戦含む)は全試合Final確認のうえrecord.mdへ確定反映済み。7/8は残り11試合もMLB Stats APIで全試合Finalを確認し、<strong>全15試合が確定反映済み（10勝5敗・66.7%）</strong>。本日7/9の13試合は本更新時点（米東部時間 未明）でいずれも試合開始前のため、次回更新で確定反映する。
     <strong>データソースの注記:</strong> 先発投手情報はMLB.com公式Probable Pitchers→Baseball Reference→Rotowire→ESPNの順で確認（Baseball Referenceは本更新時点でアクセス不可のためRotowire・ESPN・各種専門メディアで代替）。<strong style="color:#86efac;">今回は主要13球場の得点パークファクター数値を取得済み。</strong>オラクル・パーク(SF)は投手有利が平均比10%超と大きいため予想スコアに反映した。<strong style="color:#fca5a5;">両チームのwRC+は今回も未取得のためチーム勝率・被OPSで代替評価。</strong>
-    較正運用: 累積でホーム的中率49.5%がビジター59.6%を下回る傾向が継続しており、引き続きホーム側を保守的に設定している。
+    較正運用: 累積でホーム的中率51.4%がビジター58.9%を下回る傾向が継続しており、引き続きホーム側を保守的に設定している。
   </div>
 
   <div class="pick-banner seeoff">
@@ -738,18 +738,18 @@
     </table>
   </div>
 
-  <div class="section-title" style="margin-top:18px;">予測精度サマリー（208試合累積・7/7全16試合＋7/8確定4試合を反映）</div>
+  <div class="section-title" style="margin-top:18px;">予測精度サマリー（219試合累積・7/8全15試合確定を反映）</div>
   <div style="background:var(--card-bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:10px;color:var(--muted);line-height:1.8;">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-      <div>累積的中率: <strong style="color:var(--home);">54.8%</strong>（114/208試合）</div>
+      <div>累積的中率: <strong style="color:var(--home);">55.2%</strong>（121/219試合）</div>
       <div>Brierスコア: <strong style="color:var(--accent);">0.2466</strong>（ランダム0.25よりやや優秀）</div>
-      <div>グレードB的中率: <strong style="color:var(--accent);">59.4%</strong>（38/64）</div>
-      <div>グレードC的中率: <strong style="color:var(--home);">53.1%</strong>（76/143）</div>
+      <div>グレードB的中率: <strong style="color:var(--accent);">60.0%</strong>（39/65）</div>
+      <div>グレードC的中率: <strong style="color:var(--home);">53.9%</strong>（82/152）</div>
     </div>
     <div style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px;">
-      7/7は全16試合(ダブルヘッダー含む)確定反映済み(8勝8敗・50.0%)。7/8は本更新時点でFinal済みの4試合のみ反映(TOR○・ATL○・TB○・SEA×＝3勝1敗)、残り11試合は次回更新で確定反映する。
-      <br>Grade A 0/1(0.0%)・Grade B 38/64(59.4%)・Grade C 76/143(53.1%)。ホーム予測49.5%(49/99)・ビジター予測59.6%(65/109)。
-      <br><span style="color:#fca5a5;">較正運用中: ホーム予測の的中率が低迷継続。ホーム側の保守キャップ運用を継続する。</span>
+      7/8は全15試合が確定反映済み(10勝5敗・66.7%)。今季初のグレードA(STL@MIL・MIL68%)はSTL 5-1勝で外れ。本日7/9の13試合は本更新時点で試合開始前のため次回更新で確定反映する。
+      <br>Grade A 0/2(0.0%)・Grade B 39/65(60.0%)・Grade C 82/152(53.9%)。ホーム予測51.4%(55/107)・ビジター予測58.9%(66/112)。
+      <br><span style="color:#fca5a5;">較正運用中: ホーム予測の的中率がやや改善も依然ビジターを下回る。ホーム側の保守キャップ運用を継続する。</span>
       <br>※数試合では統計的に無意味。評価は数十試合単位で行い、単一試合の結果でロジックを過剰修正しない。
     </div>
   </div>
