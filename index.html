@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>MLB メジャーリーグ AI予測 2026-07-09</title>
+  <title>MLB メジャーリーグ AI予測 2026-07-10</title>
   <style>
     :root {
       --bg: #0B1220;
@@ -42,9 +42,11 @@
     .section-title { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
     .pick-banner { border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
     .pick-banner.seeoff { background: #1a1a2e; border: 1px solid #2d2d50; }
+    .pick-banner.pickon { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.35); }
     .pick-icon { font-size: 22px; flex-shrink: 0; }
     .pick-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
     .pick-title.seeoff { color: var(--muted); }
+    .pick-title.pickon { color: var(--grade-a); }
     .pick-body { font-size: 11px; color: var(--muted); line-height: 1.4; }
     .game-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 12px 10px; margin-bottom: 10px; position: relative; overflow: hidden; }
     .game-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
@@ -106,49 +108,92 @@
 
   <div class="header">
     <div class="header-label">MLB メジャーリーグ AI 予測</div>
-    <div class="header-date">2026年7月9日（木）</div>
-    <div class="header-sub">全13試合開催 / データ基準: 最終分析版</div>
-    <div class="header-badge final">最終分析版</div>
+    <div class="header-date">2026年7月10日（金）</div>
+    <div class="header-sub">全15試合開催 / データ基準: 朝版</div>
+    <div class="header-badge">朝版</div>
   </div>
 
   <div class="notice-box">
-    <span style="color:#3FA66B;font-weight:700;">【7/9 最終分析版】</span>
-    朝版から先発変更・スタメン・ILの再確認を実施。<strong class="upd-pos" style="color:#86efac;">SF(COL戦)の先発が朝版TBDからR.レイと確定（MLB.com公式・FanGraphs一致）。</strong>データ欠損ペナルティを解除し実データで再評価した結果、FIP差0.13(<0.5)により先発レイヤーは実質無効・57%上限を適用（前回比+1pt、詳細はカード参照）。<strong class="upd-neg" style="color:#fca5a5;">NYY(TB戦)の先発は最終分析版時点でも全ソース(MLB.com公式→Baseball Reference→Rotowire→ESPN)ともTBDのまま。</strong>データ欠損ルールによりグレードB上限を継続適用。他11試合の先発・成績は朝版時点から変更なしと確認。
-    <strong>IL・故障者情報の再確認:</strong> BAL守護神ヘルズリーは肘の精査のため15日IL入りを継続中（クローザー委員会運用継続）。DET救援ウィル・ベストがIL中でブリースキーが穴埋め。BOS先発P.サンドバル(CWS戦)はトミー・ジョン手術明けの球団移籍後初登板で球数制限がかかる可能性が高く、引き続き保守的に評価。
-    <strong>結果反映の状況:</strong> 7/8全15試合がMLB Stats API確認のうえFinal・record.mdへ確定反映済み（10勝5敗・66.7%）。本日7/9の13試合は本更新時点でいずれも試合開始前を確認済み。
-    較正運用: 累積でホーム的中率51.4%がビジター58.9%を下回る傾向が継続しており、引き続きホーム側を保守的に設定している。
+    <span style="color:#3FA66B;font-weight:700;">【record.md較正メモ】</span>
+    累積55.3%(125/226)・Brier 0.2467。グレード別的中率は A 0.0%(0/2)・B 59.1%(39/66)・C 54.4%(86/158)。Grade Aは通算0勝2敗とサンプルが少なく実績が乏しいため、本日の該当ピックも慎重に運用する。ホーム予測51.4%(57/111)がビジター予測59.1%(68/115)を約8pt下回る傾向が継続しており、引き続きホーム側を保守的に評価する。
+    <span style="color:#3FA66B;font-weight:700;">【analysis.md申し送り反映】</span>
+    ① 守護神が不在・委員会運用のチームは「誰が最終回を投げるか」を都度確認（本日BAL・LAAが該当）。② 故障明け・登板数が極端に少ない先発（本日はCIN H.グリーン・WSH C.パームクィスト・TOR S.ビーバー・HOU H.ブラウン）はFIP額面通りに評価せず小サンプルとして保守扱い。③ 単発の結果でロジックを過剰修正しない方針を継続。
+    <span style="color:#fca5a5;font-weight:700;">【本日のデータ欠損】</span>
+    ATH(CWS戦)・LAA(MIN戦)の先発投手はMLB.com公式→Baseball Reference→Rotowire→ESPNの全ソースで本更新時点(朝版)でも未確定(TBD)。データ欠損ルールによりグレードB上限を適用。
+    <span style="font-weight:700;">【7/9結果】</span> 13試合中7試合がFinal（4勝3敗）で反映済み。残り6試合(STL@MIL・LAA@TEX・SEA@MIA・COL@SF・PHI@CIN・AZ@SD)は次回更新で確定反映する。
   </div>
 
-  <div class="pick-banner seeoff">
-    <div class="pick-icon">&#x1F914;</div>
+  <div class="pick-banner pickon">
+    <div class="pick-icon">&#x1F3AF;</div>
     <div>
-      <div class="pick-title seeoff">本日は見送り推奨（グレードA該当なし）</div>
-      <div class="pick-body">70%以上の厳選ピックに該当する試合はなし。参考推奨はグレードB 4試合（MIL 65%・TB 60%・TEX 60%・SEA 58%）。特にSTL@MILはブルワーズがカージナルスを直近3連戦（DH含む）でスイープし相手ブルペンを大きく消耗させた点が既存の先発・チーム力優位に重なるが、MIL先発ヘンダーソンが故障者リスト明け・球数制限の可能性がある点を踏まえ通常上限65%に据え置いた。</div>
+      <div class="pick-title pickon">本日の厳選ピック（グレードA・1試合）</div>
+      <div class="pick-body">AZ@LAD: <strong style="color:var(--text);">LAD 70%</strong>。大谷翔平(LAD)がFIP2.40・ERA1.79と今季最高水準の内容で、チーム勝率(.649、MLB全体最高)・wRC+(116、MLB最高)・ブルペンFIP(3.68)のいずれもLADが優位という複数の強力な根拠が重なる例外的ケース。ただしグレードAは通算0勝2敗(0.0%)と実績が乏しく、単一試合の分散で70%でも約3割は負ける前提で参考にすること。参考推奨はグレードB 4試合（ATL 65%・CHC 60%・TB 60%・CWS 58%）。</div>
     </div>
   </div>
 
-  <!-- Card 1: STL @ MIL (MIL 65% Grade B) -->
+  <!-- Card 1: AZ @ LAD (LAD 70% Grade A) -->
+  <div class="game-card grade-a-card">
+    <div class="card-meta">
+      <span class="card-venue">ドジャー・スタジアム（LAD本拠地・同地区NL西）</span>
+      <span class="card-time">10:10 PM ET</span>
+      <span class="grade-badge A">A</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">ドジャース</div>
+        <div class="team-starter">大谷翔平 8勝2敗 ERA1.79（FIP2.40）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">ダイヤモンドバックス</div>
+        <div class="team-starter">E.ロドリゲス 7勝3敗 ERA2.25（FIP3.99）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">LAD 70%</span>
+        <span class="prob-visitor">AZ 30%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:70%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:30%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">LAD 7 - 3 AZ</span>
+      <span class="predicted-winner home-win">本命: LAD</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="key">先発FIP:</span> 大谷翔平(LAD)FIP2.40がロドリゲス(AZ)FIP3.99を大幅に上回る（差1.59）。ERA1.79も今季トップクラスの内容</li>
+      <li><span class="key">チーム力・wRC+:</span> LAD.649（MLB全体最高勝率）vs AZ.489。wRC+もLAD116（MLB最高）がAZ（wRC+未取得のためOPS.690で代替評価）を明確に上回る</li>
+      <li><span class="key">ブルペンFIP:</span> LAD3.68がAZ4.05を上回る</li>
+      <li><span class="upd-neg">同地区(NL西)対戦だが、チーム力最大差・エース級先発・打線最強という複数の強力な根拠が重なる例外的ケースとして上限70%を適用。グレードAは通算0/2と的中実績に乏しい点に留意</span></li>
+    </ul>
+  </div>
+
+  <!-- Card 2: ATL @ STL (ATL 65% Grade B) -->
   <div class="game-card grade-b-card">
     <div class="card-meta">
       <span class="card-venue">ブッシュ・スタジアム（STL本拠地）</span>
-      <span class="card-time">7:45 PM ET</span>
+      <span class="card-time">8:15 PM ET</span>
       <span class="grade-badge B">B</span>
     </div>
     <div class="teams-row">
       <div class="team-block">
         <div class="team-name home">カージナルス</div>
-        <div class="team-starter">A.パランテ 10勝5敗 ERA3.60（FIP3.95）</div>
+        <div class="team-starter">K.リーヒー 7勝4敗 ERA3.86（FIP3.91）</div>
       </div>
       <div class="vs-label">vs</div>
       <div class="team-block">
-        <div class="team-name visitor">ブルワーズ</div>
-        <div class="team-starter">L.ヘンダーソン 2勝1敗 ERA2.74（FIP2.45・IL明け）</div>
+        <div class="team-name visitor">ブレーブス</div>
+        <div class="team-starter">C.セール 9勝6敗 ERA2.27（FIP2.59）</div>
       </div>
     </div>
     <div class="prob-section">
       <div class="prob-labels">
         <span class="prob-home">STL 35%</span>
-        <span class="prob-visitor">MIL 65%</span>
+        <span class="prob-visitor">ATL 65%</span>
       </div>
       <div class="prob-bar-track">
         <div class="prob-bar-fill fill-home" style="width:35%;"></div>
@@ -157,39 +202,80 @@
     </div>
     <div class="score-row">
       <span class="score-label">予想スコア</span>
-      <span class="score-val">STL 3 - 6 MIL</span>
-      <span class="predicted-winner visitor-win">本命: MIL</span>
+      <span class="score-val">STL 3 - 6 ATL</span>
+      <span class="predicted-winner visitor-win">本命: ATL</span>
     </div>
     <ul class="reason-list">
-      <li><span class="key">先発FIP:</span> ヘンダーソン(MIL)FIP2.45がパランテ(STL)FIP3.95を大きく上回る（差1.50）。ただし背中の張りで5/22からIL入りしており、リハビリ登板(6.2回2失点・約68球)を経ての実戦復帰初戦。<span class="upd-neg">球数制限がかかる可能性が高く、通常上限65%に据え置き70%への格上げは見送った</span></li>
-      <li><span class="key">チーム力(wRC+未取得・勝率代替):</span> MIL .630(NL中地区首位) vs STL .527。Log5+ホーム調整でも先発FIP差が加勢しMIL優位</li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> MIL 3.46・ERA3.31がSTL 4.06・ERA4.17を上回る。STLは直近3連戦(7/6-7/7、DH含む)でMILにスイープされ(4-3・10-2・4-3)救援陣が大きく消耗したとの報道あり</span></li>
-      <li>球場: ブッシュ・スタジアムは投手有利傾向（得点PF約0.97）だが平均比10%以内のためスコアへの明示反映は小幅</li>
+      <li><span class="key">先発FIP:</span> セール(ATL)FIP2.59がリーヒー(STL)FIP3.91を大きく上回る（差1.32）。9勝1敗と今季絶好調</li>
+      <li>チーム力: ATL.587 vs STL.527。wRC+はほぼ互角（ATL99・STL99）で、差の主因は先発・ブルペン</li>
+      <li><span class="key">ブルペンFIP:</span> ATL3.33がSTL4.35を明確に上回る</li>
+      <li>通常上限65%を適用し据え置き。グレードAの70%までは踏み込まず慎重運用</li>
     </ul>
   </div>
 
-  <!-- Card 2: NYY @ TB (TB 60% Grade B) -->
+  <!-- Card 3: CHC @ CIN (CHC 60% Grade B) -->
   <div class="game-card grade-b-card">
     <div class="card-meta">
-      <span class="card-venue">トロピカーナ・フィールド（TB本拠地・同地区AL東）</span>
-      <span class="card-time">1:10 PM ET</span>
+      <span class="card-venue">グレートアメリカン・ボールパーク（CIN本拠地・同地区NL中）</span>
+      <span class="card-time">7:10 PM ET</span>
+      <span class="grade-badge B">B</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">レッズ</div>
+        <div class="team-starter">H.グリーン 0勝1敗 ERA21.60（FIP6.40・故障明け小サンプル3.1回）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">カブス</div>
+        <div class="team-starter">今永昇太 5勝7敗 ERA4.28（FIP4.57）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">CIN 40%</span>
+        <span class="prob-visitor">CHC 60%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:40%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:60%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">CIN 5 - 7 CHC</span>
+      <span class="predicted-winner visitor-win">本命: CHC</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neu"><span class="key">先発FIP:</span> グリーン(CIN)は肘手術明けの実戦復帰から1登板・3.1回のみで指標の信頼性が低く、額面(FIP6.40)通りに評価せず小サンプルとして保守扱い。今永(CHC)FIP4.57は季通算の安定値</span></li>
+      <li><span class="key">チーム力・wRC+:</span> CHC.559 vs CIN.462。wRC+もCHC109がCIN88（球団最下位級）を大きく上回り打線面でも明確にCHC優位</li>
+      <li>ブルペンFIP: CHC4.20がCIN4.72を上回る</li>
+      <li>球場: グレートアメリカン・ボールパークは本塁打が出やすい得点パークファクター（平均比+10%超）のためスコアを高めに反映。同地区(NL中)対戦のため60%に据え置き</li>
+    </ul>
+  </div>
+
+  <!-- Card 4: SEA @ TB (TB 60% Grade B) -->
+  <div class="game-card grade-b-card">
+    <div class="card-meta">
+      <span class="card-venue">トロピカーナ・フィールド（TB本拠地）</span>
+      <span class="card-time">7:10 PM ET</span>
       <span class="grade-badge B">B</span>
     </div>
     <div class="teams-row">
       <div class="team-block">
         <div class="team-name home">レイズ</div>
-        <div class="team-starter">D.ラスムセン 7勝4敗 ERA2.78（FIP3.33）</div>
+        <div class="team-starter">N.マルティネス 7勝2敗 ERA2.61（FIP3.72）</div>
       </div>
       <div class="vs-label">vs</div>
       <div class="team-block">
-        <div class="team-name visitor">ヤンキース</div>
-        <div class="team-starter">先発未定（TBD）</div>
+        <div class="team-name visitor">マリナーズ</div>
+        <div class="team-starter">L.カスティーヨ 3勝7敗 ERA4.79（FIP3.63）</div>
       </div>
     </div>
     <div class="prob-section">
       <div class="prob-labels">
         <span class="prob-home">TB 60%</span>
-        <span class="prob-visitor">NYY 40%</span>
+        <span class="prob-visitor">SEA 40%</span>
       </div>
       <div class="prob-bar-track">
         <div class="prob-bar-fill fill-home" style="width:60%;"></div>
@@ -198,287 +284,162 @@
     </div>
     <div class="score-row">
       <span class="score-label">予想スコア</span>
-      <span class="score-val">TB 5 - 3 NYY</span>
+      <span class="score-val">TB 5 - 3 SEA</span>
       <span class="predicted-winner home-win">本命: TB</span>
     </div>
     <ul class="reason-list">
-      <li><span class="upd-neg">最終分析版時点で再確認したがNYY先発は依然全ソースTBD（データ欠損ルールによりグレードB上限を継続適用）。NYYはローテーションが手薄（ロドンは肘炎症でIL、フリードもリハビリ中、ストローマンは放出済み）でブルペンデーの可能性にも留意</span></li>
-      <li><span class="key">先発FIP:</span> ラスムセン(TB)FIP3.33・K/BB5.65は6月度AL月間最優秀投手の絶好調内容</li>
-      <li><span class="upd-neg"><span class="key">ブルペンFIP:</span> NYY 3.68・ERA3.04がTB 4.57・ERA4.30を上回り、TBの優位を一部相殺。前日7/8はNYY先発コールが6.1回で早期降板せず救援を軽負荷(0.2回+1.0回)にとどめており、NYYブルペンはフレッシュ</span></li>
-      <li>チーム力(wRC+未取得): TB .604(AL東首位) vs NYY .538。同地区対戦のため保守的に設定</li>
+      <li><span class="upd-neu">先発FIPはカスティーヨ(SEA)3.63とマルティネス(TB)3.72でほぼ互角（差0.09<0.5）のため先発レイヤーはほぼ無効化</span></li>
+      <li><span class="key">チーム力・wRC+:</span> TB.593(AL東首位) vs SEA.505。wRC+もTB104がSEA101をわずかに上回る</li>
+      <li><span class="upd-neg"><span class="key">ブルペンFIP:</span> SEA3.45がTB4.38を明確に上回りTBの優位を圧縮。本来はもっと高くなるところをSEAブルペン優位で60%に抑えた</span></li>
+      <li>球場: ドーム球場で投手有利傾向だが平均比10%以内のため明示反映は小幅</li>
     </ul>
   </div>
 
-  <!-- Card 3: LAA @ TEX (TEX 60% Grade B) -->
+  <!-- Card 5: ATH @ CWS (CWS 58% Grade B) -->
   <div class="game-card grade-b-card">
     <div class="card-meta">
-      <span class="card-venue">グローブライフ・フィールド（TEX本拠地・同地区AL西）</span>
-      <span class="card-time">8:05 PM ET</span>
+      <span class="card-venue">レート・フィールド（CWS本拠地）</span>
+      <span class="card-time">7:40 PM ET</span>
       <span class="grade-badge B">B</span>
     </div>
     <div class="teams-row">
       <div class="team-block">
-        <div class="team-name home">レンジャーズ</div>
-        <div class="team-starter">N.エオバルディ 9勝7敗 ERA4.02（FIP4.26）</div>
+        <div class="team-name home">ホワイトソックス</div>
+        <div class="team-starter">S.バーク 5勝4敗 ERA3.56（FIP3.54）</div>
       </div>
       <div class="vs-label">vs</div>
       <div class="team-block">
-        <div class="team-name visitor">エンゼルス</div>
-        <div class="team-starter">R.デトマーズ 3勝6敗 ERA4.13（FIP3.12）</div>
+        <div class="team-name visitor">アスレチックス</div>
+        <div class="team-starter">先発未定（TBD）</div>
       </div>
     </div>
     <div class="prob-section">
       <div class="prob-labels">
-        <span class="prob-home">TEX 60%</span>
-        <span class="prob-visitor">LAA 40%</span>
+        <span class="prob-home">CWS 58%</span>
+        <span class="prob-visitor">ATH 42%</span>
       </div>
       <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:60%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:40%;"></div>
+        <div class="prob-bar-fill fill-home" style="width:58%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:42%;"></div>
       </div>
     </div>
     <div class="score-row">
       <span class="score-label">予想スコア</span>
-      <span class="score-val">TEX 5 - 3 LAA</span>
-      <span class="predicted-winner home-win">本命: TEX</span>
+      <span class="score-val">CWS 5 - 3 ATH</span>
+      <span class="predicted-winner home-win">本命: CWS</span>
     </div>
     <ul class="reason-list">
-      <li><span class="upd-neu">先発FIPはデトマーズ(LAA)3.12がエオバルディ(TEX)4.26を上回る（差1.14）が、デトマーズは直近1週間ERA9.00・WHIP2.00と崩れ気味でシーズン通算FIPほどの信頼度はない</span></li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> TEX 3.94・ERA3.98がLAA 4.24・ERA4.66を上回る。前日7/8(TEX 8-3勝)でLAAはサウセドがブロウンセーブ・バックマンが2/3回5失点と大炎上し、守護神委員会状態が続き大きく消耗</span></li>
-      <li><span class="key">チーム力(wRC+未取得):</span> TEX .500 vs LAA .398と大差。シーガー(TEX)は腰の張りで今季3度目のIL入り中で打線への影響に留意</li>
-      <li>同地区(AL西)対戦のため保守的に設定。球場: グローブライフ・フィールドは投手有利傾向（得点PF約0.95）</li>
+      <li><span class="upd-neg">ATH先発はMLB公式→Baseball Reference→Rotowire→ESPNいずれのソースでも本更新(朝版)時点で未確定(TBD)。データ欠損ルールによりグレードB上限を適用し保守評価</span></li>
+      <li><span class="key">先発FIP:</span> バーク(CWS)FIP3.54は季通算で安定した内容</li>
+      <li>チーム力・wRC+: CWS.511 vs ATH.441。wRC+はCWS103・ATH102とほぼ互角</li>
+      <li><span class="key">ブルペンFIP:</span> CWS4.16がATH5.23（リーグ最下位級）を大幅に上回り、CWS優位の主因</li>
     </ul>
   </div>
 
-  <!-- Card 4: SEA @ MIA (SEA 58% Grade B) -->
-  <div class="game-card grade-b-card">
-    <div class="card-meta">
-      <span class="card-venue">ローンデポ・パーク（MIA本拠地）</span>
-      <span class="card-time">6:40 PM ET</span>
-      <span class="grade-badge B">B</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">マーリンズ</div>
-        <div class="team-starter">J.ジャンク 3勝5敗 ERA4.80（FIP4.15）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">マリナーズ</div>
-        <div class="team-starter">B.ミラー 4勝2敗 ERA1.71（FIP2.81）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">MIA 42%</span>
-        <span class="prob-visitor">SEA 58%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:42%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:58%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">MIA 3 - 4 SEA</span>
-      <span class="predicted-winner visitor-win">本命: SEA</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neg">先発がJ.ジャンク(MIA)と確定。前日までT.フィリップスとの情報食い違いがあったが、フィリップスは7/8の同カードに既に先発・勝利投手として登板済みのため連投は考えにくく、MLB公式2ソース一致のジャンクを採用</span></li>
-      <li><span class="key">先発FIP:</span> ミラー(SEA)FIP2.81・ERA1.71・K/BB12.40が圧倒的。ジャンク(MIA)FIP4.15を大幅に上回る（差1.34）</li>
-      <li><span class="upd-neg"><span class="key">ブルペンFIP:</span> SEA 3.35・ERA3.54がMIA 3.82・ERA4.04を上回る</span></li>
-      <li>チーム力(wRC+未取得): MIA .553 vs SEA .500とMIAがやや優位、ホーム+4pt込みでも先発FIP差が上回りSEAを優位と評価</li>
-      <li><span class="upd-neu">SEA主砲J.ロドリゲスは脳震盪プロトコルで7日IL中、打線への影響に留意</span></li>
-    </ul>
-  </div>
-
-  <!-- Card 5: COL @ SF (SF 57% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">オラクル・パーク（SF本拠地）</span>
-      <span class="card-time">9:45 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">ジャイアンツ</div>
-        <div class="team-starter">R.レイ 8勝6敗 ERA3.45（FIP4.55）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">ロッキーズ</div>
-        <div class="team-starter">R.フェルトナー 3勝2敗 ERA4.27（FIP4.68）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">SF 57%</span>
-        <span class="prob-visitor">COL 43%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:57%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:43%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">SF 5 - 3 COL</span>
-      <span class="predicted-winner home-win">本命: SF</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-pos">SF先発が朝版TBDからR.レイ(FanGraphs確認)と確定。<span class="key">前回比+1pt(56%→57%):</span> データ欠損ペナルティを解除し実データで再評価。FIP差はレイ4.55とフェルトナー4.68でわずか0.13(<0.5)のため先発レイヤーは実質無効化・上限57%を適用</span></li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> SF 4.22・ERA4.56がCOL 4.68・ERA5.47(リーグ最下位級)を明確に上回り、57%上限まで押し上げる主因</span></li>
-      <li><span class="key">球場:</span> オラクル・パークは得点パークファクターが平均比10%超の投手有利（推定0.90前後）と大きく、予想スコアを低め(3-5点台)に反映</li>
-      <li>チーム力(wRC+未取得): SF .409 vs COL .404とほぼ互角、ホーム+4ptとブルペン差でSFを優位と評価</li>
-    </ul>
-  </div>
-
-  <!-- Card 6: KC @ NYM (NYM 56% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">シティ・フィールド（NYM本拠地）</span>
-      <span class="card-time">1:10 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">メッツ</div>
-        <div class="team-starter">S.マナイア 1勝4敗 ERA4.76（FIP4.05）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">ロイヤルズ</div>
-        <div class="team-starter">M.ワッカ 5勝6敗 ERA3.45（FIP3.96）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">NYM 56%</span>
-        <span class="prob-visitor">KC 44%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:56%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:44%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">NYM 4 - 3 KC</span>
-      <span class="predicted-winner home-win">本命: NYM</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neu">FIP差0.09(<0.5)でほぼ互角のため先発レイヤーを実質無効化・57%以下に抑制。マナイア(NYM)ERA4.76・ワッカ(KC)ERA3.45と表面成績には差があるがFIPは拮抗</span></li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> NYM 3.95・ERA3.98がKC 5.19・ERA5.22(リーグ最悪級)を大幅に上回る。前日7/8の同カードでKCはオープナー起用のクルーズから複数投手を早期投入する変則運用で消耗</span></li>
-      <li>チーム力(wRC+未取得): NYM .419 vs KC .409とほぼ互角。ホーム+4ptとブルペン差でNYM優位と評価</li>
-      <li><span class="upd-neu">NYM守護神ディアスは肘手術明けで今季60日IL中</span></li>
-    </ul>
-  </div>
-
-  <!-- Card 7: ATL @ PIT (ATL 55% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">PNCパーク（PIT本拠地）</span>
-      <span class="card-time">12:35 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">パイレーツ</div>
-        <div class="team-starter">M.ケラー 6勝6敗 ERA5.02（FIP4.43）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">ブレーブス</div>
-        <div class="team-starter">B.エルダー 5勝6敗 ERA4.01（FIP4.03）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">PIT 45%</span>
-        <span class="prob-visitor">ATL 55%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:45%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:55%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">PIT 3 - 4 ATL</span>
-      <span class="predicted-winner visitor-win">本命: ATL</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neg">ケラー(PIT)がERA5.02でERA5+キャップに該当し55%上限が発動。FIP差(4.43-4.03=0.40<0.5)自体も小さく先発レイヤーはほぼ互角評価</span></li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> ATL 3.58・ERA3.13がPIT 4.39・ERA4.43を明確に上回る</span></li>
-      <li>チーム力(wRC+未取得): ATL .587 vs PIT .500とATLが優位。前日7/8の同カード(ATL 3-0 PIT)でATL守護神イグレシアスが登板済みだが軽負荷</li>
-      <li>球場: PNCパークはパークファクター値がソース間で不一致（102 vs 0.96）のため今回は評価に用いず保守的に据え置き</li>
-    </ul>
-  </div>
-
-  <!-- Card 8: CLE @ MIN (CLE 55% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">ターゲット・フィールド（MIN本拠地・同地区AL中）</span>
-      <span class="card-time">1:40 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">ツインズ</div>
-        <div class="team-starter">B.オーバー 6勝3敗 ERA4.59（FIP5.02・IL明け）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">ガーディアンズ</div>
-        <div class="team-starter">G.ウィリアムズ 9勝4敗 ERA3.89（FIP3.87）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">MIN 45%</span>
-        <span class="prob-visitor">CLE 55%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:45%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:55%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">MIN 3 - 4 CLE</span>
-      <span class="predicted-winner visitor-win">本命: CLE</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neg">オーバー(MIN)がFIP5.02でFIP4.8+キャップに該当し55%上限。右肘炎症で5週間IL入り後のリハビリ登板2試合を経ての実戦復帰初戦で球数制限の可能性が高い</span></li>
-      <li><span class="key">先発FIP:</span> ウィリアムズ(CLE)FIP3.87がオーバー(MIN)FIP5.02を大幅に上回る（差1.15）</li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> CLE 3.86・ERA3.79がMIN 4.65・ERA5.25を上回る</span></li>
-      <li><span class="upd-neg">MIN主力バクストンが股関節痛でIL入り、投手ラヤも肩の炎症でIL入りと投打両面で戦力ダウン</span></li>
-      <li>同地区(AL中)対戦のため保守的に設定</li>
-    </ul>
-  </div>
-
-  <!-- Card 9: CHC @ BAL (CHC 55% Grade C) -->
+  <!-- Card 6: KC @ BAL (BAL 55% Grade C) -->
   <div class="game-card grade-c-card">
     <div class="card-meta">
       <span class="card-venue">カムデンヤーズ（BAL本拠地）</span>
-      <span class="card-time">6:35 PM ET</span>
+      <span class="card-time">7:05 PM ET</span>
       <span class="grade-badge C">C</span>
     </div>
     <div class="teams-row">
       <div class="team-block">
         <div class="team-name home">オリオールズ</div>
-        <div class="team-starter">T.ロジャース 6勝7敗 ERA4.70（FIP4.07）</div>
+        <div class="team-starter">B.ヤング 7勝2敗 ERA3.38（FIP3.84）</div>
       </div>
       <div class="vs-label">vs</div>
       <div class="team-block">
-        <div class="team-name visitor">カブス</div>
-        <div class="team-starter">D.ピーターソン 4勝7敗 ERA6.75（FIP4.14）</div>
+        <div class="team-name visitor">ロイヤルズ</div>
+        <div class="team-starter">L.アビラ 4勝3敗 ERA5.05（FIP4.34）</div>
       </div>
     </div>
     <div class="prob-section">
       <div class="prob-labels">
-        <span class="prob-home">BAL 45%</span>
-        <span class="prob-visitor">CHC 55%</span>
+        <span class="prob-home">BAL 55%</span>
+        <span class="prob-visitor">KC 45%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:55%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:45%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">BAL 4 - 3 KC</span>
+      <span class="predicted-winner home-win">本命: BAL</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neg">アビラ(KC)がERA5.05でERA5+キャップに該当し55%上限が発動。FIP4.34自体はヤング(BAL)3.84をやや下回る程度（差0.50）</span></li>
+      <li>チーム力・wRC+: BAL.457 vs KC.404。wRC+はBAL102がKC97を上回る</li>
+      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> BAL4.33がKC5.35（リーグ最下位級）を大きく上回る</span></li>
+      <li><span class="upd-neu">BALは守護神ヘルズリーが肘の精査でIL中でクローザー委員会運用中。前日7/9(BAL 3-2 CHC)はキットリッジがセーブを記録し委員会運用でも接戦を締めくくれることを確認済み</span></li>
+    </ul>
+  </div>
+
+  <!-- Card 7: LAA @ MIN (MIN 55% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">ターゲット・フィールド（MIN本拠地）</span>
+      <span class="card-time">8:10 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">ツインズ</div>
+        <div class="team-starter">Z.マシューズ 4勝5敗 ERA4.43（FIP4.99）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">エンゼルス</div>
+        <div class="team-starter">先発未定（TBD）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">MIN 55%</span>
+        <span class="prob-visitor">LAA 45%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:55%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:45%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">MIN 4 - 3 LAA</span>
+      <span class="predicted-winner home-win">本命: MIN</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neg">マシューズ(MIN)がFIP4.99でFIP4.8+キャップに該当し55%上限。加えてLAA先発も全ソースで未取得(TBD)のためデータ欠損ルールでも保守評価</span></li>
+      <li>チーム力・wRC+: MIN.489 vs LAA.398。wRC+はMIN105がLAA98を上回る</li>
+      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> MIN5.34（リーグ最下位級）がLAA4.62を下回るが、上記2つの保守要因を優先し55%に据え置き</span></li>
+      <li>LAAはトラウトが負傷欠場から復帰したが、確率算出には数値化できる先発・ブルペン・wRC+のみを用いる</li>
+    </ul>
+  </div>
+
+  <!-- Card 8: NYY @ WSH (NYY 55% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">ナショナルズ・パーク（WSH本拠地）</span>
+      <span class="card-time">6:45 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">ナショナルズ</div>
+        <div class="team-starter">C.パームクィスト 0勝1敗 ERA7.11（FIP1.84・小サンプル6.1回）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">ヤンキース</div>
+        <div class="team-starter">R.ウェザーズ 3勝7敗 ERA4.29（FIP3.98）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">WSH 45%</span>
+        <span class="prob-visitor">NYY 55%</span>
       </div>
       <div class="prob-bar-track">
         <div class="prob-bar-fill fill-home" style="width:45%;"></div>
@@ -487,18 +448,223 @@
     </div>
     <div class="score-row">
       <span class="score-label">予想スコア</span>
-      <span class="score-val">BAL 3 - 4 CHC</span>
-      <span class="predicted-winner visitor-win">本命: CHC</span>
+      <span class="score-val">WSH 3 - 5 NYY</span>
+      <span class="predicted-winner visitor-win">本命: NYY</span>
     </div>
     <ul class="reason-list">
-      <li><span class="upd-neg">ピーターソン(CHC)がERA6.75でERA5+キャップに該当し55%上限。FIP自体は4.14でロジャース(BAL)4.07とほぼ互角(差0.07)</span></li>
-      <li><span class="key">チーム力(wRC+未取得):</span> CHC .565 vs BAL .452とCHCが優位</li>
-      <li><span class="upd-neu"><span class="key">ブルペンFIP:</span> BAL 4.00・CHC 4.73とFIPはBALが上回るがERAはCHC 4.03・BAL 4.27とやや逆転しており指標間で評価が割れる。BAL守護神ヘルズリーは肘の不調でIL中でクローザー委員会運用中</span></li>
-      <li>前日7/8の同カードはCHC 9-7 BALで確定（レイ5.1回3失点がクレマー5回4失点をわずかに上回り的中）。両ブルペンとも複数人投入の乱打戦でやや消耗した点に留意</li>
+      <li><span class="upd-neu">パームクィスト(WSH)はメジャー6.1回のみの小サンプルでFIP1.84は信頼度が低く、額面通りには評価せず保守扱い。ERA7.11の方が実態に近い可能性がありNYYに有利な材料</span></li>
+      <li><span class="key">先発FIP:</span> ウェザーズ(NYY)FIP3.98は季通算の安定値</li>
+      <li>チーム力・wRC+: NYY.548 vs WSH.511。wRC+はNYY106・WSH108とほぼ拮抗</li>
+      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> NYY3.14（リーグ上位級）がWSH5.13（下位級）を大幅に上回り、NYY優位の主因</span></li>
     </ul>
   </div>
 
-  <!-- Card 10: ATH @ DET (DET 55% Grade C) -->
+  <!-- Card 9: BOS @ NYM (BOS 55% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">シティ・フィールド（NYM本拠地）</span>
+      <span class="card-time">7:15 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">メッツ</div>
+        <div class="team-starter">N.マクレーン 6勝5敗 ERA3.73（FIP3.15）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">レッドソックス</div>
+        <div class="team-starter">S.グレイ 10勝1敗 ERA2.61（FIP3.49）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">NYM 45%</span>
+        <span class="prob-visitor">BOS 55%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:45%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:55%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">NYM 3 - 4 BOS</span>
+      <span class="predicted-winner visitor-win">本命: BOS</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neu">先発FIPはマクレーン(NYM)3.15がグレイ(BOS)3.49をわずかに上回るが差0.34(<0.5)のため先発レイヤーは実質無効化。グレイは10勝1敗と勝敗数で突出</span></li>
+      <li>チーム力・wRC+: BOS.473 vs NYM.426。wRC+は両者93で完全に互角</li>
+      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> BOS3.55（チャップマン健在）がNYM4.23を上回る。前日7/9(BOS 2-1 CWS)もチャップマンがセーブを記録し状態良好</span></li>
+      <li>FIP差僅少のため上限57%以下に抑制し55%に設定</li>
+    </ul>
+  </div>
+
+  <!-- Card 10: COL @ SF (SF 55% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">オラクル・パーク（SF本拠地・同地区NL西）</span>
+      <span class="card-time">10:15 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">ジャイアンツ</div>
+        <div class="team-starter">R.レイ 8勝6敗 ERA3.45（FIP4.68）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">ロッキーズ</div>
+        <div class="team-starter">T.ゴードン 0勝2敗 ERA6.95（FIP4.89）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">SF 55%</span>
+        <span class="prob-visitor">COL 45%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:55%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:45%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">SF 4 - 3 COL</span>
+      <span class="predicted-winner home-win">本命: SF</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neg">ゴードン(COL)がERA6.95・FIP4.89とERA5+/FIP4.8+の両基準に該当し55%上限が発動。レイ(SF)FIP4.68との差は0.21とFIP自体は接近</span></li>
+      <li>チーム力: SF.413 vs COL.404とほぼ最下位同士。wRC+はSF100（平均並）がCOL（wRC+未取得のためOPS.752で代替評価）と拮抗</li>
+      <li><span class="key">ブルペンFIP:</span> SF4.60がCOL4.86をわずかに上回る</li>
+      <li>球場: オラクル・パークは投手有利な球場として知られる。同地区(NL西)対戦のため保守的に55%に据え置き</li>
+    </ul>
+  </div>
+
+  <!-- Card 11: MIL @ PIT (MIL 55% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">PNCパーク（PIT本拠地・同地区NL中）</span>
+      <span class="card-time">6:40 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">パイレーツ</div>
+        <div class="team-starter">B.アシュクラフト 9勝3敗 ERA3.24（FIP2.98）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">ブルワーズ</div>
+        <div class="team-starter">B.スプロート 3勝4敗 ERA5.13（FIP4.68）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">PIT 45%</span>
+        <span class="prob-visitor">MIL 55%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:45%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:55%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">PIT 3 - 4 MIL</span>
+      <span class="predicted-winner visitor-win">本命: MIL</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neg">スプロート(MIL)がERA5.13でERA5+キャップに該当し55%上限が発動。FIPでもアシュクラフト(PIT)2.98がスプロート4.68を大きく上回る（差1.70）</span></li>
+      <li>チーム力: MIL.630(MLB全体2位級の高勝率) vs PIT.500。wRC+はPIT109がMIL104をわずかに上回る</li>
+      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> MIL3.49（上位級）がPIT4.47を明確に上回り、キャップがなければ65%超も見込める内容だが上限を優先</span></li>
+      <li>同地区(NL中)対戦のため保守的な運用とも整合的</li>
+    </ul>
+  </div>
+
+  <!-- Card 12: CLE @ MIA (CLE 54% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">ローンデポ・パーク（MIA本拠地）</span>
+      <span class="card-time">7:10 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">マーリンズ</div>
+        <div class="team-starter">S.アルカンタラ 10勝4敗 ERA4.00（FIP3.67）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">ガーディアンズ</div>
+        <div class="team-starter">P.メシック 7勝5敗 ERA2.80（FIP3.05）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">MIA 46%</span>
+        <span class="prob-visitor">CLE 54%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:46%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:54%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">MIA 3 - 4 CLE</span>
+      <span class="predicted-winner visitor-win">本命: CLE</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="key">先発FIP:</span> メシック(CLE)FIP3.05がアルカンタラ(MIA)FIP3.67を上回る（差0.62>0.5）</li>
+      <li>チーム力・wRC+: MIA.548 vs CLE.511とMIAが優位。wRC+もMIA103がCLE(wRC+未取得のためOPS.679で代替評価・下位級)を上回り打線面ではMIAが優位</li>
+      <li>ブルペンFIP: CLE3.78がMIA4.02をわずかに上回る</li>
+      <li>先発の質はCLEが上回るが、打線・チーム力・ホームアドバンテージでMIAが対抗しており僅差の54%に設定</li>
+    </ul>
+  </div>
+
+  <!-- Card 13: TOR @ SD (SD 54% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">ペトコ・パーク（SD本拠地）</span>
+      <span class="card-time">9:40 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">パドレス</div>
+        <div class="team-starter">J.P.シアーズ 2勝1敗 ERA4.70（FIP6.03・小サンプル15.1回）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">ブルージェイズ</div>
+        <div class="team-starter">S.ビーバー 0勝1敗 ERA9.00（FIP9.33・故障明け小サンプル13.0回）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">SD 54%</span>
+        <span class="prob-visitor">TOR 46%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:54%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:46%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">SD 4 - 3 TOR</span>
+      <span class="predicted-winner home-win">本命: SD</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neg">両先発とも故障明け・登板数が極めて少ない「荒れ球カード」。額面のFIP(シアーズ6.03・ビーバー9.33)は信頼度が低いためERA5+/FIP4.8+キャップの55%上限をさらに保守側に1pt引き下げ54%とした</span></li>
+      <li>チーム力: SD.500 vs TOR.473とほぼ互角。wRC+はTOR93、SDはwRC+未取得のためOPS.674(下位級)で代替評価しTOR打線がやや優位の可能性</li>
+      <li>ブルペンFIP: SD3.60がTOR3.79をわずかに上回る</li>
+      <li>両先発の不確実性が高いため保守的に54%に設定</li>
+    </ul>
+  </div>
+
+  <!-- Card 14: PHI @ DET (DET 53% Grade C) -->
   <div class="game-card grade-c-card">
     <div class="card-meta">
       <span class="card-venue">コメリカ・パーク（DET本拠地）</span>
@@ -508,141 +674,18 @@
     <div class="teams-row">
       <div class="team-block">
         <div class="team-name home">タイガース</div>
-        <div class="team-starter">F.バルデス 4勝6敗 ERA4.29（FIP4.34）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">アスレチックス</div>
-        <div class="team-starter">J.パーキンス 2勝4敗 ERA6.75（FIP4.04）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">DET 55%</span>
-        <span class="prob-visitor">ATH 45%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:55%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:45%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">DET 4 - 3 ATH</span>
-      <span class="predicted-winner home-win">本命: DET</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neg">パーキンス(ATH)がERA6.75でERA5+キャップに該当し55%上限。FIP4.04自体はバルデス(DET)4.34より良くERA-FIP乖離が大きい（被運の悪さの可能性）が、キャップ運用を優先し据え置き</span></li>
-      <li><span class="upd-pos"><span class="key">ブルペンFIP:</span> DET 4.22・ERA3.99がATH 4.56・ERA5.08を上回る</span></li>
-      <li>チーム力(wRC+未取得): DET .457 vs ATH .446とほぼ互角。前日7/8(DET大量リード)でATH先発スプリングスが4.1回6失点と炎上しブルペンを消耗。ATHはW.ベストが肘の炎症でIL中でブルペン層もやや薄い</li>
-      <li>ATHはルーカー(主砲)が膝の軟骨損傷でシーズン絶望となり打線への影響に留意</li>
-    </ul>
-  </div>
-
-  <!-- Card 11: PHI @ CIN (PHI 55% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">グレートアメリカン・ボールパーク（CIN本拠地）</span>
-      <span class="card-time">7:10 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">レッズ</div>
-        <div class="team-starter">B.シンガー 3勝8敗 ERA5.03（FIP5.89）</div>
+        <div class="team-starter">J.フラハティ 2勝8敗 ERA4.60（FIP3.51）</div>
       </div>
       <div class="vs-label">vs</div>
       <div class="team-block">
         <div class="team-name visitor">フィリーズ</div>
-        <div class="team-starter">J.ルザード 7勝4敗 ERA3.75（FIP3.00）</div>
+        <div class="team-starter">A.ノーラ 3勝6敗 ERA5.87（FIP4.69）</div>
       </div>
     </div>
     <div class="prob-section">
       <div class="prob-labels">
-        <span class="prob-home">CIN 45%</span>
-        <span class="prob-visitor">PHI 55%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:45%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:55%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">CIN 3 - 5 PHI</span>
-      <span class="predicted-winner visitor-win">本命: PHI</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neg">シンガー(CIN)がERA5.03・FIP5.89とERA5+/FIP4.8+の両基準に該当する大幅な該当で55%上限が発動。本来はルザード(PHI)FIP3.00との差(2.89)が非常に大きく上限がなければ65%超の水準</span></li>
-      <li><span class="key">先発内容:</span> ルザード(PHI)は直近登板(7/4)も6回1失点の好投で今季安定</li>
-      <li><span class="upd-neg"><span class="key">ブルペンFIP:</span> PHI 3.68・ERA4.26がCIN 4.84・ERA4.57を上回るが、PHIブルペンは直近1週間でERA7.20と急激に悪化しておりトリビーノのIL入りも重なり不安材料</span></li>
-      <li>チーム力(wRC+未取得): PHI .548 vs CIN .462とPHIが優位。球場: グレートアメリカン・ボールパークは本塁打が出やすい傾向(HR指数+18%程度)</li>
-    </ul>
-  </div>
-
-  <!-- Card 12: AZ @ SD (SD 55% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">ペトコ・パーク（SD本拠地・同地区NL西）</span>
-      <span class="card-time">9:40 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">パドレス</div>
-        <div class="team-starter">G.キャニング 1勝6敗 ERA6.71（FIP5.11）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">ダイヤモンドバックス</div>
-        <div class="team-starter">M.ケリー 6勝8敗 ERA5.71（FIP6.06）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">SD 55%</span>
-        <span class="prob-visitor">AZ 45%</span>
-      </div>
-      <div class="prob-bar-track">
-        <div class="prob-bar-fill fill-home" style="width:55%;"></div>
-        <div class="prob-bar-fill fill-visitor" style="width:45%;"></div>
-      </div>
-    </div>
-    <div class="score-row">
-      <span class="score-label">予想スコア</span>
-      <span class="score-val">SD 4 - 3 AZ</span>
-      <span class="predicted-winner home-win">本命: SD</span>
-    </div>
-    <ul class="reason-list">
-      <li><span class="upd-neg">両先発がERA5+/FIP4.8+の両基準に該当する"荒れ球"カードで55%上限が発動。キャニング(SD)FIP5.11がケリー(AZ)FIP6.06をやや上回る（差0.95）が上限を優先</span></li>
-      <li><span class="key">ブルペンFIP:</span> SD 4.12・ERA4.21とAZ 4.38・ERA4.24はほぼ互角、僅かにSD優位</li>
-      <li>チーム力(wRC+未取得): SD .500 vs AZ .489とほぼ互角。ホーム+4ptと僅かなブルペン差でSDを優位と評価</li>
-      <li>同地区(NL西)対戦のため保守的に設定。球場: ペトコ・パークは投手有利傾向（得点PF約0.95）</li>
-    </ul>
-  </div>
-
-  <!-- Card 13: BOS @ CWS (CWS 53% Grade C) -->
-  <div class="game-card grade-c-card">
-    <div class="card-meta">
-      <span class="card-venue">レート・フィールド（CWS本拠地）</span>
-      <span class="card-time">2:10 PM ET</span>
-      <span class="grade-badge C">C</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-block">
-        <div class="team-name home">ホワイトソックス</div>
-        <div class="team-starter">A.ケイ 6勝3敗 ERA4.29（FIP4.97）</div>
-      </div>
-      <div class="vs-label">vs</div>
-      <div class="team-block">
-        <div class="team-name visitor">レッドソックス</div>
-        <div class="team-starter">P.サンドバル（トミー・ジョン明けBOS移籍後初登板）</div>
-      </div>
-    </div>
-    <div class="prob-section">
-      <div class="prob-labels">
-        <span class="prob-home">CWS 53%</span>
-        <span class="prob-visitor">BOS 47%</span>
+        <span class="prob-home">DET 53%</span>
+        <span class="prob-visitor">PHI 47%</span>
       </div>
       <div class="prob-bar-track">
         <div class="prob-bar-fill fill-home" style="width:53%;"></div>
@@ -651,18 +694,59 @@
     </div>
     <div class="score-row">
       <span class="score-label">予想スコア</span>
-      <span class="score-val">CWS 4 - 3 BOS</span>
-      <span class="predicted-winner home-win">本命: CWS</span>
+      <span class="score-val">DET 4 - 3 PHI</span>
+      <span class="predicted-winner home-win">本命: DET</span>
     </div>
     <ul class="reason-list">
-      <li><span class="upd-neg">ケイ(CWS)がFIP4.97でFIP4.8+キャップに該当し55%上限が発動。サンドバル(BOS)は2024年のトミー・ジョン手術明けで2026年MLB実績なし、BOS移籍後初登板のため参考データ自体が乏しく「未取得」に近い扱いとし保守的に評価</span></li>
-      <li><span class="upd-neg"><span class="key">ブルペンFIP:</span> BOS 3.85・ERA3.37がCWS 4.32・ERA4.14を上回り、CWSの優位をさらに圧縮。前日7/8の同カードでBOS先発ベネットが5回無失点と好投しブルペンを温存できている点も考慮し55%キャップからさらに2pt引き下げて53%とした</span></li>
-      <li>チーム力(wRC+未取得): CWS .516 vs BOS .467とCWSが優位、ホーム+4ptが加勢するが上記要因で相殺</li>
-      <li>サンドバルはリハビリ登板(5回無失点7奪三振・約68球)は好内容だが実戦のブランクが長く、球数制限がかかる可能性が高い</li>
+      <li><span class="upd-neg">ノーラ(PHI)がERA5.87でERA5+キャップに該当。FIPでもフラハティ(DET)3.51がノーラ4.69を上回る（差1.18）</span></li>
+      <li>チーム力はPHI.548がDET.462を上回るが、先発・打線・ブルペンの各レイヤーはいずれもDET優位でチーム記録の差を相殺</li>
+      <li><span class="key">チームwRC+:</span> DET100がPHI93を上回る</li>
+      <li><span class="key">ブルペンFIP:</span> DET3.91がPHI4.32を上回る。先発・ブルペン・打線の3レイヤーが揃ってDET優位のため、チーム記録で上回るPHIから予測側を反転しDET53%とした</li>
     </ul>
   </div>
 
-  <div class="section-title" style="margin-top:20px;">2026シーズン順位表（7/8終了時点）</div>
+  <!-- Card 15: HOU @ TEX (TEX 53% Grade C) -->
+  <div class="game-card grade-c-card">
+    <div class="card-meta">
+      <span class="card-venue">グローブライフ・フィールド（TEX本拠地・同地区AL西）</span>
+      <span class="card-time">8:05 PM ET</span>
+      <span class="grade-badge C">C</span>
+    </div>
+    <div class="teams-row">
+      <div class="team-block">
+        <div class="team-name home">レンジャーズ</div>
+        <div class="team-starter">C.クアントリル 3勝1敗 ERA3.35（FIP4.27）</div>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="team-block">
+        <div class="team-name visitor">アストロズ</div>
+        <div class="team-starter">H.ブラウン 1勝0敗 ERA3.38（FIP4.22・故障明け小サンプル29.1回）</div>
+      </div>
+    </div>
+    <div class="prob-section">
+      <div class="prob-labels">
+        <span class="prob-home">TEX 53%</span>
+        <span class="prob-visitor">HOU 47%</span>
+      </div>
+      <div class="prob-bar-track">
+        <div class="prob-bar-fill fill-home" style="width:53%;"></div>
+        <div class="prob-bar-fill fill-visitor" style="width:47%;"></div>
+      </div>
+    </div>
+    <div class="score-row">
+      <span class="score-label">予想スコア</span>
+      <span class="score-val">TEX 4 - 3 HOU</span>
+      <span class="predicted-winner home-win">本命: TEX</span>
+    </div>
+    <ul class="reason-list">
+      <li><span class="upd-neu">先発FIPはブラウン(HOU)4.22とクアントリル(TEX)4.27でほぼ互角（差0.05<0.5）。ブラウンは肩の故障による60日IL明けで登板数29.1回とまだ少なく信頼度は割り引く</span></li>
+      <li>チーム力・wRC+: TEX.500 vs HOU.484とほぼ互角。wRC+はHOU103がTEX101をわずかに上回る</li>
+      <li><span class="key">ブルペンFIP:</span> TEX3.87がHOU4.12を上回る</li>
+      <li>同地区(AL西)対戦のため保守的に設定し、ホームアドバンテージとブルペン差でTEXをわずかに優位と評価</li>
+    </ul>
+  </div>
+
+  <div class="section-title" style="margin-top:20px;">2026シーズン順位表（7/10試合開始前時点）</div>
 
   <div style="margin-bottom:10px;">
     <div style="font-size:10px;color:var(--visitor);font-weight:700;margin-bottom:4px;border-bottom:1px solid var(--border);padding-bottom:3px;">アメリカン・リーグ (AL)</div>
@@ -670,32 +754,32 @@
     <table class="standings-table">
       <thead><tr><th>#</th><th>チーム</th><th>勝</th><th>敗</th><th>勝率</th></tr></thead>
       <tbody>
-        <tr class="al"><td>1</td><td class="team-abbr">TB</td><td>55</td><td>36</td><td class="rate">.604</td></tr>
-        <tr class="al"><td>2</td><td class="team-abbr">NYY</td><td>50</td><td>43</td><td class="rate">.538</td></tr>
-        <tr class="al"><td>3</td><td class="team-abbr">TOR</td><td>45</td><td>49</td><td class="rate">.479</td></tr>
-        <tr class="al"><td>4</td><td class="team-abbr">BOS</td><td>42</td><td>48</td><td class="rate">.467</td></tr>
-        <tr class="al"><td>5</td><td class="team-abbr">BAL</td><td>42</td><td>51</td><td class="rate">.452</td></tr>
+        <tr class="al"><td>1</td><td class="team-abbr">TB</td><td>54</td><td>37</td><td class="rate">.593</td></tr>
+        <tr class="al"><td>2</td><td class="team-abbr">NYY</td><td>51</td><td>42</td><td class="rate">.548</td></tr>
+        <tr class="al"><td>3</td><td class="team-abbr">TOR</td><td>44</td><td>49</td><td class="rate">.473</td></tr>
+        <tr class="al"><td>4</td><td class="team-abbr">BOS</td><td>43</td><td>48</td><td class="rate">.473</td></tr>
+        <tr class="al"><td>5</td><td class="team-abbr">BAL</td><td>43</td><td>51</td><td class="rate">.457</td></tr>
       </tbody>
     </table>
     <div class="div-label" style="margin-top:6px;">AL中地区</div>
     <table class="standings-table">
       <thead><tr><th>#</th><th>チーム</th><th>勝</th><th>敗</th><th>勝率</th></tr></thead>
       <tbody>
-        <tr class="al"><td>1</td><td class="team-abbr">CWS</td><td>47</td><td>44</td><td class="rate">.516</td></tr>
-        <tr class="al"><td>2</td><td class="team-abbr">CLE</td><td>47</td><td>46</td><td class="rate">.505</td></tr>
-        <tr class="al"><td>3</td><td class="team-abbr">MIN</td><td>46</td><td>47</td><td class="rate">.495</td></tr>
-        <tr class="al"><td>4</td><td class="team-abbr">DET</td><td>42</td><td>50</td><td class="rate">.457</td></tr>
-        <tr class="al"><td>5</td><td class="team-abbr">KC</td><td>38</td><td>55</td><td class="rate">.409</td></tr>
+        <tr class="al"><td>1</td><td class="team-abbr">CWS</td><td>47</td><td>45</td><td class="rate">.511</td></tr>
+        <tr class="al"><td>2</td><td class="team-abbr">CLE</td><td>48</td><td>46</td><td class="rate">.511</td></tr>
+        <tr class="al"><td>3</td><td class="team-abbr">MIN</td><td>46</td><td>48</td><td class="rate">.489</td></tr>
+        <tr class="al"><td>4</td><td class="team-abbr">DET</td><td>43</td><td>50</td><td class="rate">.462</td></tr>
+        <tr class="al"><td>5</td><td class="team-abbr">KC</td><td>38</td><td>56</td><td class="rate">.404</td></tr>
       </tbody>
     </table>
     <div class="div-label" style="margin-top:6px;">AL西地区</div>
     <table class="standings-table">
       <thead><tr><th>#</th><th>チーム</th><th>勝</th><th>敗</th><th>勝率</th></tr></thead>
       <tbody>
-        <tr class="al"><td>1</td><td class="team-abbr">TEX</td><td>46</td><td>46</td><td class="rate">.500</td></tr>
-        <tr class="al"><td>2</td><td class="team-abbr">SEA</td><td>47</td><td>47</td><td class="rate">.500</td></tr>
+        <tr class="al"><td>1</td><td class="team-abbr">SEA</td><td>47</td><td>46</td><td class="rate">.505</td></tr>
+        <tr class="al"><td>2</td><td class="team-abbr">TEX</td><td>46</td><td>46</td><td class="rate">.500</td></tr>
         <tr class="al"><td>3</td><td class="team-abbr">HOU</td><td>46</td><td>49</td><td class="rate">.484</td></tr>
-        <tr class="al"><td>4</td><td class="team-abbr">ATH</td><td>41</td><td>51</td><td class="rate">.446</td></tr>
+        <tr class="al"><td>4</td><td class="team-abbr">ATH</td><td>41</td><td>52</td><td class="rate">.441</td></tr>
         <tr class="al"><td>5</td><td class="team-abbr">LAA</td><td>37</td><td>56</td><td class="rate">.398</td></tr>
       </tbody>
     </table>
@@ -708,10 +792,10 @@
       <thead><tr><th>#</th><th>チーム</th><th>勝</th><th>敗</th><th>勝率</th></tr></thead>
       <tbody>
         <tr class="nl"><td>1</td><td class="team-abbr">ATL</td><td>54</td><td>38</td><td class="rate">.587</td></tr>
-        <tr class="nl"><td>2</td><td class="team-abbr">MIA</td><td>52</td><td>42</td><td class="rate">.553</td></tr>
-        <tr class="nl"><td>3</td><td class="team-abbr">PHI</td><td>51</td><td>42</td><td class="rate">.548</td></tr>
+        <tr class="nl"><td>2</td><td class="team-abbr">PHI</td><td>51</td><td>42</td><td class="rate">.548</td></tr>
+        <tr class="nl"><td>3</td><td class="team-abbr">MIA</td><td>51</td><td>42</td><td class="rate">.548</td></tr>
         <tr class="nl"><td>4</td><td class="team-abbr">WSH</td><td>48</td><td>46</td><td class="rate">.511</td></tr>
-        <tr class="nl"><td>5</td><td class="team-abbr">NYM</td><td>39</td><td>54</td><td class="rate">.419</td></tr>
+        <tr class="nl"><td>5</td><td class="team-abbr">NYM</td><td>40</td><td>54</td><td class="rate">.426</td></tr>
       </tbody>
     </table>
     <div class="div-label" style="margin-top:6px;">NL中地区</div>
@@ -719,7 +803,7 @@
       <thead><tr><th>#</th><th>チーム</th><th>勝</th><th>敗</th><th>勝率</th></tr></thead>
       <tbody>
         <tr class="nl"><td>1</td><td class="team-abbr">MIL</td><td>58</td><td>34</td><td class="rate">.630</td></tr>
-        <tr class="nl"><td>2</td><td class="team-abbr">CHC</td><td>52</td><td>40</td><td class="rate">.565</td></tr>
+        <tr class="nl"><td>2</td><td class="team-abbr">CHC</td><td>52</td><td>41</td><td class="rate">.559</td></tr>
         <tr class="nl"><td>3</td><td class="team-abbr">STL</td><td>48</td><td>43</td><td class="rate">.527</td></tr>
         <tr class="nl"><td>4</td><td class="team-abbr">PIT</td><td>47</td><td>47</td><td class="rate">.500</td></tr>
         <tr class="nl"><td>5</td><td class="team-abbr">CIN</td><td>42</td><td>49</td><td class="rate">.462</td></tr>
@@ -732,39 +816,38 @@
         <tr class="nl"><td>1</td><td class="team-abbr">LAD</td><td>61</td><td>33</td><td class="rate">.649</td></tr>
         <tr class="nl"><td>2</td><td class="team-abbr">SD</td><td>46</td><td>46</td><td class="rate">.500</td></tr>
         <tr class="nl"><td>3</td><td class="team-abbr">AZ</td><td>45</td><td>47</td><td class="rate">.489</td></tr>
-        <tr class="nl"><td>4</td><td class="team-abbr">SF</td><td>38</td><td>55</td><td class="rate">.409</td></tr>
+        <tr class="nl"><td>4</td><td class="team-abbr">SF</td><td>38</td><td>54</td><td class="rate">.413</td></tr>
         <tr class="nl"><td>5</td><td class="team-abbr">COL</td><td>38</td><td>56</td><td class="rate">.404</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="section-title" style="margin-top:18px;">予測精度サマリー（219試合累積・7/8全15試合を反映）</div>
+  <div class="section-title" style="margin-top:18px;">予測精度サマリー（226試合累積・7/9部分反映）</div>
   <div style="background:var(--card-bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:10px;color:var(--muted);line-height:1.8;">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-      <div>累積的中率: <strong style="color:var(--home);">55.2%</strong>（121/219試合）</div>
-      <div>Brierスコア: <strong style="color:var(--accent);">0.2466</strong>（ランダム0.25よりやや優秀）</div>
-      <div>グレードB的中率: <strong style="color:var(--accent);">60.0%</strong>（39/65）</div>
-      <div>グレードC的中率: <strong style="color:var(--home);">53.9%</strong>（82/152）</div>
+      <div>累積的中率: <strong style="color:var(--home);">55.3%</strong>（125/226試合）</div>
+      <div>Brierスコア: <strong style="color:var(--accent);">0.2467</strong>（ランダム0.25よりやや優秀）</div>
+      <div>グレードB的中率: <strong style="color:var(--accent);">59.1%</strong>（39/66）</div>
+      <div>グレードC的中率: <strong style="color:var(--home);">54.4%</strong>（86/158）</div>
     </div>
     <div style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px;">
-      7/8は全15試合が確定反映済み(10勝5敗・66.7%)。今季初のグレードA(STL@MIL・MIL68%)は先発ハリソン4回3失点に対しSTL先発マグリービーが6.1回1失点と好投し外れ、厳選ピックの分散リスクを改めて示した。
-      <br>Grade A 0/2(0.0%)・Grade B 39/65(60.0%)・Grade C 82/152(53.9%)。ホーム予測51.4%(55/107)・ビジター予測58.9%(66/112)。
-      <br><span style="color:#fca5a5;">較正運用中: ホーム予測の的中率が51.4%まで改善したが依然ビジターを約8pt下回る状態が続いており、ホーム側の保守キャップ運用を継続する。</span>
+      7/9は13試合中7試合がFinal（4勝3敗・57.1%）で反映済み。残り6試合(STL@MIL・LAA@TEX・SEA@MIA・COL@SF・PHI@CIN・AZ@SD)は次回更新で確定反映する。
+      <br>Grade A 0/2(0.0%)・Grade B 39/66(59.1%)・Grade C 86/158(54.4%)。ホーム予測51.4%(57/111)・ビジター予測59.1%(68/115)。
+      <br><span style="color:#fca5a5;">較正運用中: ホーム予測の的中率が依然ビジターを約8pt下回る状態が続いており、ホーム側の保守キャップ運用を継続する。</span>
       <br>※数試合では統計的に無意味。評価は数十試合単位で行い、単一試合の結果でロジックを過剰修正しない。
     </div>
   </div>
 
-  <div class="section-title" style="margin-top:18px;">算出根拠サマリー（7/9 最終分析版）</div>
+  <div class="section-title" style="margin-top:18px;">算出根拠サマリー（7/10 朝版）</div>
   <div style="background:var(--card-bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:10px;color:var(--muted);line-height:1.7;">
     <div style="margin-bottom:4px;"><strong style="color:var(--text);">本日の特記事項:</strong></div>
-    <div>厳選ピック(グレードA)は該当なし。最上位はSTL@MIL(MIL 65%)で、ブルワーズが直近3連戦でカージナルスをスイープし相手ブルペンを消耗させた点に加え先発FIP差・チーム力差が重なるが、MIL先発ヘンダーソンのIL明け球数制限を考慮し通常上限65%に据え置いた（70%への格上げは見送り）。</div>
-    <div><strong style="color:#86efac;">最終分析版での変更点:</strong> SF(COL戦)の先発が朝版TBDからR.レイと確定。データ欠損ペナルティを解除しFIP差0.13(<0.5)による57%上限で再評価した結果、SF 56%→57%(前回比+1pt)に更新。他12試合は先発・スタメン・ILとも朝版から変更なしと確認済み。</div>
-    <div><strong style="color:#fca5a5;">先発未確定1試合:</strong> NYY(TB戦)は最終分析版時点でも全ソースTBD。データ欠損ルールによりグレードB上限を継続適用。</div>
-    <div><strong style="color:#fca5a5;">ERA5+/FIP4.8+キャップが多数の試合で発動:</strong> ATL@PIT(ケラー)・CLE@MIN(オーバー)・BOS@CWS(ケイ)・CHC@BAL(ピーターソン)・ATH@DET(パーキンス)・PHI@CIN(シンガー、ERA/FIP両該当)・AZ@SD(両先発該当)の7試合が該当し、いずれも55%上限で評価。</div>
-    <div><strong style="color:#94a3b8;">FIP差0.5未満→先発レイヤー無効・57%以下に抑制:</strong> KC@NYM(差0.09)・ATL@PIT(差0.40、ERA5+キャップと重複)・COL@SF(差0.13、新規)。</div>
-    <div><strong style="color:var(--muted);">データソースの制約:</strong> 先発投手情報はMLB.com公式Probable Pitchers→Baseball Reference→Rotowire→ESPNの順で確認（Baseball Referenceは本更新時点でアクセス不可）。<strong style="color:#86efac;">主要13球場の得点パークファクター数値を今回は取得済み（オラクル・パークのみ平均比10%超で予想スコアに反映）。</strong><strong style="color:#fca5a5;">両チームのwRC+は今回も未取得のためチーム勝率・被OPSで代替評価。</strong></div>
-    <div style="margin-top:4px;"><strong style="color:var(--muted);">出場状況の確認:</strong> J.ロドリゲス(SEA)は脳震盪で7日IL。バクストン(MIN)・ラヤ(MIN投手)がIL入り。シーガー(TEX)は腰の張りで今季3度目のIL入り継続。ルーカー(ATH)は膝の軟骨損傷でシーズン絶望。ヘルズリー(BAL)は肘の精査のためIL継続中でクローザー委員会運用中。W.ベスト(DET投手)がIL中でブリースキーが救援陣を補強。トリビーノ(PHI)が胸部筋痙攣でIL入りしPHIブルペンの層がさらに薄くなっている。</div>
-    <div style="margin-top:2px;color:var(--accent);">データソース: MLB.com公式Probable Pitchers/スコアボード・MLB Stats API→Baseball Reference→Rotowire→ESPN（先発・IL確認）。順位表は7/8終了時点（全試合反映済み）。</div>
+    <div>厳選ピック(グレードA)はAZ@LAD(LAD 70%)の1試合。大谷翔平のFIP2.40・ERA1.79という際立った内容に、LADのチーム勝率(.649・MLB最高)・wRC+(116・MLB最高)・ブルペンFIP(3.68)がいずれも優位という複数の強力な根拠が重なる例外的ケースとして上限70%を適用した。ただしグレードAは通算0勝2敗と実績が乏しいため単一試合の結果を過大評価しない。</div>
+    <div><strong style="color:#fca5a5;">先発未確定2試合:</strong> ATH(CWS戦)・LAA(MIN戦)は朝版時点で全ソースTBD。データ欠損ルールによりグレードB上限を適用。最終分析版更新時に必ず再確認する。</div>
+    <div><strong style="color:#fca5a5;">ERA5+/FIP4.8+キャップが発動した試合:</strong> PHI@DET(ノーラ)・MIL@PIT(スプロート)・KC@BAL(アビラ)・LAA@MIN(マシューズ)・COL@SF(ゴードン)・TOR@SD(ビーバー、極端な故障明け小サンプルにより55%上限からさらに1pt引き下げ)の6試合。</div>
+    <div><strong style="color:#94a3b8;">FIP差0.5未満→先発レイヤー無効:</strong> SEA@TB(差0.09)・BOS@NYM(差0.34)・HOU@TEX(差0.05)の3試合。</div>
+    <div><strong style="color:var(--muted);">データソースの制約:</strong> 先発投手情報はMLB Stats API(公式Probable Pitchers)を一次情報源とし、TBDだった一部(TEX先発C.クアントリル・TOR先発S.ビーバー)はRotowireで補完確認した。<strong style="color:#fca5a5;">AZ・CLEの2球団はwRC+未取得のためチームOPSで代替評価。</strong>ブルペンFIPはFanGraphs系・Baseball Reference系の複数ソースを平均して算出した。</div>
+    <div style="margin-top:4px;"><strong style="color:var(--muted);">出場状況の確認:</strong> BAL守護神ヘルズリーは肘の精査でIL継続中でクローザー委員会運用。CHC守護神パレンシア・マトンはいずれも15日IL中で不在。COLは新守護神ロマーノが直近セーブを重ね定着傾向。LAAはトラウトが負傷から復帰し打線強化の動きがあるが確率算出には数値化できる要素のみを用いた。</div>
+    <div style="margin-top:2px;color:var(--accent);">データソース: MLB Stats API（公式スケジュール・確定投手・スコア）→Baseball Reference→Rotowire→ESPN（先発補完）。順位表は7/10試合開始前時点。</div>
   </div>
 
   <div class="about-note">
@@ -776,7 +859,7 @@
   </div>
 
   <div class="disclaimer">
-    <span class="warn">【免責事項】</span> 本予測はAIによる統計的分析であり、<span class="warn">勝利を保証するものではありません。</span>野球の単一試合は分散が大きく、65%の本命でも約35%は負ける。投資・賭博等の判断への使用は禁止します。本ページは2026-07-09（最終分析版）。先発・チーム成績は本更新時点のシーズン通算。NYY(TB戦)の先発投手は本更新時点で未確定(TBD)のため試合開始前の再確認を推奨。試合開始時間はすべてET（東部時間）。
+    <span class="warn">【免責事項】</span> 本予測はAIによる統計的分析であり、<span class="warn">勝利を保証するものではありません。</span>野球の単一試合は分散が大きく、65%の本命でも約35%は負ける（本日の70%ピックでも約3割は負ける水準）。投資・賭博等の判断への使用は禁止します。本ページは2026-07-10（朝版）。先発・チーム成績は本更新時点のシーズン通算。ATH(CWS戦)・LAA(MIN戦)の先発投手は本更新時点で未確定(TBD)のため試合開始前の再確認を推奨。試合開始時間はすべてET（東部時間）。
   </div>
 
 </body>
