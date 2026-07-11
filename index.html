@@ -109,23 +109,24 @@
   <div class="header">
     <div class="header-label">MLB メジャーリーグ AI 予測</div>
     <div class="header-date">2026年7月11日（土）</div>
-    <div class="header-sub">全16試合開催（MIL@PITダブルヘッダー含む）/ データ基準: 朝版</div>
-    <div class="header-badge">朝版</div>
+    <div class="header-sub">全16試合開催（MIL@PITダブルヘッダー含む）/ データ基準: 最終分析版</div>
+    <div class="header-badge final">最終分析版</div>
   </div>
 
   <div class="notice-box">
     <span style="color:#3FA66B;font-weight:700;">【record.md較正メモ】</span>
     累積55.6%(129/232)・Brier 0.2459。グレード別的中率は A 0.0%(0/2)・B 59.4%(41/69)・C 54.7%(88/161)。直近20試合のBrierスコアは0.236と累積値より改善傾向で足元の較正は機能中。ホーム予測52.2%(60/115)がビジター予測59.0%(69/117)を約7pt下回る状態が継続しており、本日もホーム側は保守的に評価する。グレードAは通算0/2と実績が乏しいため、ERA5+/FIP4.8+キャップが1試合でも発動する場合は他の根拠がどれだけ強くても55%以下に据え置く。
     <span style="color:#3FA66B;font-weight:700;">【analysis.md申し送り反映】</span>
-    ① 守護神・クローザーは「誰が最終回を投げるか」を都度確認（BAL: T.ウェルズが継続、CIN: E.パガン復帰、CWS: 委員会運用、他多数のIL/交代情報を反映）。② IL明け・降格明け・小サンプルの先発（LAA R.ジョンソン、ARI B.プファート、ATL R.ロペス、BOS B.ベロ等）はFIP額面通りに評価せず保守扱い。③ MLB公式Probable Pitchers（Stats API）を先発投手の一次情報源として継続使用。④ 単発の結果でロジックを過剰修正しない方針を継続。
-    <span style="font-weight:700;">【7/10試合の状況】</span> 本更新の実行時点（2026-07-10 21:11 PM ET）でMLB Stats API確認したところ、7/10の15試合は1試合（MIL@PIT）が雨天中止となり本日7/11にダブルヘッダーとして順延、残り14試合はいずれも進行中・遅延中で結果未確定。7/10分の的中判定・累積再計算・振り返りは次回更新に持ち越す。
+    ① 守護神・クローザーは「誰が最終回を投げるか」を都度確認（BAL: T.ウェルズが継続、CIN: E.パガン復帰、CWS: 委員会運用、他多数のIL/交代情報を反映）。② IL明け・降格明け・小サンプルの先発（LAA R.ジョンソン、ARI B.プファート、ATL R.ロペス、BOS E.リベラ等）はFIP額面通りに評価せず保守扱い。③ MLB公式Probable Pitchers（Stats API）を先発投手の一次情報源として継続使用。④ 単発の結果でロジックを過剰修正しない方針を継続。
+    <span style="font-weight:700;">【7/10試合の状況】</span> 7/10の15試合は1試合（MIL@PIT）が雨天中止となり本日7/11にダブルヘッダーとして順延、残り14試合の的中判定・累積再計算・振り返りは通常の朝版フローで次回更新時に持ち越す。
+    <span style="color:#3FA66B;font-weight:700;">【最終分析版・確認事項】</span> 本更新時点（7/11 8:40 AM ET）で全16試合は試合開始前（最速はMIL@PIT第1試合12:05 PM ET）。MLB公式Probable PitchersおよびBaseball Reference・Rotowire・ESPNで先発投手を再確認し、以下3点を修正: ①MIL@PIT第1試合はスプロート(MIL) vs アシュクラフト(PIT)で正式確定（朝版のTBD表記を解除、確率は変更なし）。②ARI@LADは山本由伸がオールスター休止前最終登板として予定通り先発することを確認（9勝5敗・ERA2.49・WHIP0.88・100奪三振の安定した内容、確率は変更なし）。③COL@SFのSF先発は表記ミスで「マーレイ」ではなく正しくはT.メイル(Mahle)（成績・確率は変更なし、名前のみ修正）。④BOS@NYMのBOS先発はB.ベロではなく正式にE.リベラ(Eduardo Rivera)に確定（4月のMLBデビュー登板1試合・3.1回・ERA0.00のみで実績はほぼ皆無の超小サンプルのため、保守的に確率は54%のまま据え置き）。他の試合は先発・救援陣とも朝版から変更なし。
   </div>
 
   <div class="pick-banner seeoff">
     <div class="pick-icon">&#x1F6D1;</div>
     <div>
       <div class="pick-title seeoff">本日は厳選ピック（グレードA）なし・見送り推奨</div>
-      <div class="pick-body">最有力候補だったAZ@LAD（山本由伸 FIP3.26・ERA2.49、LADはチーム勝率.649でMLB全体最高）も、相手先発プファート(ARI)がFIP4.96でERA5+/FIP4.8+キャップに該当し55%上限が発動するため、グレードA(70%)の基準を満たさない。参考推奨はグレードB 2試合（MIL@PIT第2戦 MIL63%・SEA@TB TB58%）。</div>
+      <div class="pick-body">最有力候補だったAZ@LAD（山本由伸 FIP3.26・ERA2.49、オールスター休止前最終登板として先発確定、LADはチーム勝率.649でMLB全体最高）も、相手先発プファート(ARI)がFIP4.96でERA5+/FIP4.8+キャップに該当し55%上限が発動するため、グレードA(70%)の基準を満たさない。参考推奨はグレードB 2試合（MIL@PIT第2戦 MIL63%・SEA@TB TB58%）。</div>
     </div>
   </div>
 
@@ -451,6 +452,7 @@
     </div>
     <ul class="reason-list">
       <li><span class="upd-neg">プファート(AZ)がFIP4.96でFIP4.8+キャップに該当し55%上限が発動。6/4に3A降格・6/30に再昇格したばかりの小サンプル(5先発)で信頼度も低い。本来は山本由伸の内容・LADのチーム勝率.649（MLB全体最高）を踏まえグレードA(70%)級の根拠が重なる試合だが、キャップ運用を優先し55%に抑制する</li>
+      <li><span class="upd-pos">山本由伸はMLB公式でオールスター休止前最終登板として正式に先発確定（9勝5敗・ERA2.49・WHIP0.88・104.2回100奪三振）。前回登板が7/10のブルペンデー起用だったのは大谷翔平のローテーション調整に伴う一時的な変則であり、通常のローテーションに復帰したことを確認</li>
       <li><span class="key">先発FIP:</span> 山本由伸FIP3.26がプファートFIP4.96を大幅に上回る（差1.70）。ERA2.49・BAA.190もNL屈指の内容</li>
       <li><span class="key">チームwRC+:</span> LAD116（MLB最高級）がAZ89を大きく上回る</li>
       <li><span class="key">ブルペンFIP:</span> LAD3.62がAZ3.90を上回る</li>
@@ -596,7 +598,7 @@
       <div class="vs-label">vs</div>
       <div class="team-block">
         <div class="team-name visitor">ブルワーズ</div>
-        <div class="team-starter">B.スプロート ERA5.13（FIP4.92・予告、MLB公式は本稿執筆時点でTBD表記）</div>
+        <div class="team-starter">B.スプロート ERA5.13（FIP4.92）</div>
       </div>
     </div>
     <div class="prob-section">
@@ -616,7 +618,7 @@
     </div>
     <ul class="reason-list">
       <li><span class="upd-neg">スプロート(MIL)がERA5.13・FIP4.92でERA5+/FIP4.8+の両キャップに該当し55%上限が発動。アシュクラフト(PIT)FIP3.16との差は1.76とさらに拡大するが上限を優先</span></li>
-      <li>MLB公式スケジュールは本稿執筆時点でこの第1試合の両先発を正式にTBD表記。7/10雨天中止前の予告投手（スプロート×アシュクラフト）を基に評価しており、直前で変更があり得る点に留意</li>
+      <li><span class="upd-pos">MLB公式Probable Pitchersでスプロート×アシュクラフトの先発が正式確定（朝版時点のTBD表記を解除）。7/10雨天中止前の予告投手がそのまま採用された</span></li>
       <li><span class="key">チームwRC+:</span> PIT109がMIL104をわずかに上回る</li>
       <li><span class="key">ブルペンFIP:</span> MIL(ERA3.4台)がPIT(ERA4.5台)を明確に上回り、キャップがなければ65%超も見込める内容</li>
     </ul>
@@ -632,7 +634,7 @@
     <div class="teams-row">
       <div class="team-block">
         <div class="team-name home">ジャイアンツ</div>
-        <div class="team-starter">T.マーレイ ERA5.70（FIP4.16）</div>
+        <div class="team-starter">T.メイル ERA5.70（FIP4.16）</div>
       </div>
       <div class="vs-label">vs</div>
       <div class="team-block">
@@ -656,8 +658,9 @@
       <span class="predicted-winner home-win">本命: SF</span>
     </div>
     <ul class="reason-list">
-      <li><span class="upd-neg">フリーランド(COL)ERA7.46・FIP4.94、マーレイ(SF)ERA5.70といずれもERA5+/FIP4.8+キャップに該当する「荒れ球カード」。両先発とも不振のため55%上限をさらに保守側に1pt引き下げ54%とした</span></li>
-      <li><span class="key">先発FIP:</span> マーレイFIP4.16がフリーランドFIP4.94を上回る（差0.78）</li>
+      <li><span class="upd-neg">フリーランド(COL)ERA7.46・FIP4.94、メイル(SF)ERA5.70といずれもERA5+/FIP4.8+キャップに該当する「荒れ球カード」。両先発とも不振のため55%上限をさらに保守側に1pt引き下げ54%とした</span></li>
+      <li><span class="upd-neu">先発名を朝版の「マーレイ」表記から正式名T.メイル(Mahle)に訂正（成績・確率は変更なし）</span></li>
+      <li><span class="key">先発FIP:</span> メイルFIP4.16がフリーランドFIP4.94を上回る（差0.78）</li>
       <li><span class="key">チームwRC+:</span> SF101がCOL93を上回る</li>
       <li><span class="key">ブルペンFIP:</span> SF4.45がCOL4.37とほぼ互角</li>
       <li>同地区(NL西)対戦のため保守運用と整合的。オラクル・パークはやや投手有利の球場</li>
@@ -679,7 +682,7 @@
       <div class="vs-label">vs</div>
       <div class="team-block">
         <div class="team-name visitor">レッドソックス</div>
-        <div class="team-starter">B.ベロ ERA6.34（FIP不安定・3A降格明け、先発未確定）</div>
+        <div class="team-starter">E.リベラ ERA0.00（MLB通算3.1回のみ・4月デビュー後初の再登板）</div>
       </div>
     </div>
     <div class="prob-section">
@@ -698,8 +701,8 @@
       <span class="predicted-winner home-win">本命: NYM</span>
     </div>
     <ul class="reason-list">
-      <li><span class="upd-neg">MLB公式は本稿執筆時点でBOS先発をTBD表記。報道ベースでベロ(ERA6.34、6/5に3Aへ降格→再昇格)が有力だが正式発表前のため不確実性が高く、ERA5+キャップの55%上限をさらに1pt引き下げ54%とした</span></li>
-      <li><span class="key">先発FIP:</span> ペラルタ(NYM)FIP4.29はベロの season FIP(6.24・情報源間で相違あり信頼度低)を大きく上回る</li>
+      <li><span class="upd-neg">朝版で有力視していたB.ベロではなく、MLB公式でE.リベラ(Eduardo Rivera)がBOS先発として正式確定。リベラは4/22のMLBデビュー登板（3.1回・無失点）以降マイナー再降格されており、実質的にMLBでの登板実績がほぼ皆無の超小サンプル。FIP等の指標が算出不能なため「未取得」に準じて保守評価とし、54%上限を継続した</span></li>
+      <li><span class="key">先発FIP:</span> ペラルタ(NYM)FIP4.29は季通算で安定。リベラは信頼できるFIPサンプルなし</li>
       <li><span class="key">チームwRC+:</span> NYM93・BOS92とほぼ互角。チーム勝率はBOS.473がNYM.426をわずかに上回るが、ホームアドバンテージと先発の不確実性を踏まえNYMを本命とする</li>
       <li><span class="key">ブルペンFIP:</span> NYM3.90・BOS3.76とほぼ互角</li>
     </ul>
@@ -879,15 +882,16 @@
     </div>
   </div>
 
-  <div class="section-title" style="margin-top:18px;">算出根拠サマリー（7/11 朝版）</div>
+  <div class="section-title" style="margin-top:18px;">算出根拠サマリー（7/11 最終分析版）</div>
   <div style="background:var(--card-bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:10px;color:var(--muted);line-height:1.7;">
     <div style="margin-bottom:4px;"><strong style="color:var(--text);">本日の特記事項:</strong></div>
-    <div>本日は厳選ピック(グレードA)なし。ARI@LAD（山本由伸FIP3.26・ERA2.49、LADチーム勝率.649でMLB最高）は複数の強力な根拠が重なる潜在的なグレードA候補だったが、相手先発プファート(AZ)がFIP4.96でERA5+/FIP4.8+キャップに該当し55%上限が発動したため、キャップ運用を優先し見送った。参考推奨はグレードB 2試合（MIL@PIT第2戦 MIL63%・SEA@TB TB58%）。</div>
-    <div><strong style="color:#fca5a5;">ERA5+/FIP4.8+キャップが発動した試合:</strong> LAA@MIN(R.ジョンソン)・NYY@WSH(ミコラス)・ATL@STL(リベラトーレ)・CLE@MIA(ビビー)・ARI@LAD(プファート)・COL@SF(フリーランド・マーレイの両先発)・BOS@NYM(ベロ)・MIL@PIT第1戦(スプロート)・TOR@SD(ビューラー)・CHC@CIN(アサド・ロドロの両先発)の10試合。特にCOL@SF・CHC@CIN・TOR@SDは両先発ともキャップ該当または直近乱調のため、55%上限をさらに1pt引き下げ54%とした。</div>
+    <div>本日は厳選ピック(グレードA)なし。ARI@LAD（山本由伸FIP3.26・ERA2.49、オールスター休止前最終登板として先発確定、LADチーム勝率.649でMLB最高）は複数の強力な根拠が重なる潜在的なグレードA候補だったが、相手先発プファート(AZ)がFIP4.96でERA5+/FIP4.8+キャップに該当し55%上限が発動したため、キャップ運用を優先し見送った。参考推奨はグレードB 2試合（MIL@PIT第2戦 MIL63%・SEA@TB TB58%）。</div>
+    <div><strong style="color:#3FA66B;">最終分析版での確定・修正点:</strong> ①MIL@PIT第1試合（スプロート×アシュクラフト）が朝版のTBD表記から正式確定（数値変更なし）。②ARI@LADの山本由伸が予定通り先発することを確認（数値変更なし）。③COL@SFのSF先発は表記ミスで「マーレイ」を正しくはT.メイル(Mahle)に訂正（数値変更なし）。④BOS@NYMのBOS先発は朝版で有力視していたB.ベロではなく、MLB公式でE.リベラ(Eduardo Rivera)に確定。リベラは4月のMLBデビュー登板（3.1回無失点）以来の実質初再登板でFIP等の指標が算出不能な超小サンプルのため「未取得」に準じて保守評価とし、確率は54%のまま据え置いた。他12試合は先発・救援陣とも朝版から変更なし。</div>
+    <div><strong style="color:#fca5a5;">ERA5+/FIP4.8+キャップが発動した試合:</strong> LAA@MIN(R.ジョンソン)・NYY@WSH(ミコラス)・ATL@STL(リベラトーレ)・CLE@MIA(ビビー)・ARI@LAD(プファート)・COL@SF(フリーランド・メイルの両先発)・MIL@PIT第1戦(スプロート)・TOR@SD(ビューラー)・CHC@CIN(アサド・ロドロの両先発)の9試合。BOS@NYMはベロのキャップ判定に代えて、リベラの実績皆無を理由とする保守評価（未取得準拠）に切り替えた。特にCOL@SF・CHC@CIN・TOR@SDは両先発ともキャップ該当または直近乱調のため、55%上限をさらに1pt引き下げ54%とした。</div>
     <div><strong style="color:#94a3b8;">FIP差0.5未満→先発レイヤー無効:</strong> KC@BAL(差0.09)・PHI@DET(差0.05)・HOU@TEX(差0.41)・CLE@MIA(差0.45・キャップとも重複)・TOR@SD(差0.24・キャップとも重複)の5試合。</div>
-    <div><strong style="color:var(--muted);">データソースの制約:</strong> 先発投手情報はMLB Stats API（公式Probable Pitchers、hydrate=probablePitcher）を一次情報源とし、FanGraphs→Baseball Reference→MLB.com→ESPNの順で補完確認した。<strong style="color:#fca5a5;">本更新ではBaseball Referenceの個別ページが軒並みHTTP 403でブロックされ直接参照できなかったため、Baseball Savant・MLB.com・StatMuseで代替検証した。</strong>一部のOPS-againstは全ソースで取得できず「未取得」として保守評価に含めた。MIL@PIT第1試合の両先発はMLB公式が本稿執筆時点でTBD表記のため、7/10雨天中止前の予告投手を暫定採用している。</div>
-    <div style="margin-top:4px;"><strong style="color:var(--muted);">出場状況の確認:</strong> BAL守護神ヘルズリーはIL継続中でT.ウェルズが後継。CHC守護神パレンシアはIL中でJ.ウェッブが代行。CIN守護神パガンはハムストリング故障から復帰済み。CWSは守護神委員会運用（ドミンゲス／G.テイラー）。LAD守護神ディアスはIL中でT.スコットが継続、山本由伸を含むローテーションは大谷翔平の登板調整（左膝の負担管理）の影響で一部前後した。</div>
-    <div style="margin-top:2px;color:var(--accent);">データソース: MLB Stats API（公式スケジュール・確定投手）→FanGraphs→Baseball Reference→MLB.com→ESPN（先発補完）。順位表は7/11試合開始前時点（一部データソースの更新タイミングにより前日終了時点の値を含む）。</div>
+    <div><strong style="color:var(--muted);">データソースの制約:</strong> 先発投手情報はMLB Stats API（公式Probable Pitchers）を一次情報源とし、Baseball Reference→Rotowire→ESPNの順で補完確認した。一部のOPS-againstは全ソースで取得できず「未取得」として保守評価に含めた。</div>
+    <div style="margin-top:4px;"><strong style="color:var(--muted);">出場状況の確認:</strong> BAL守護神ヘルズリーはIL継続中でT.ウェルズが後継。CIN守護神パガンはIL明けで復帰済み（6.43ERAとやや不安定）。CWSは守護神委員会運用だがS.ドミンゲスが直近7試合無失点で主体的な役割。LAD守護神ディアスはIL中でT.スコットが継続。</div>
+    <div style="margin-top:2px;color:var(--accent);">データソース: MLB Stats API（公式スケジュール・確定投手）→Baseball Reference→Rotowire→ESPN（先発補完）。順位表は7/11試合開始前時点（一部データソースの更新タイミングにより前日終了時点の値を含む）。</div>
   </div>
 
   <div class="about-note">
@@ -899,7 +903,7 @@
   </div>
 
   <div class="disclaimer">
-    <span class="warn">【免責事項】</span> 本予測はAIによる統計的分析であり、<span class="warn">勝利を保証するものではありません。</span>野球の単一試合は分散が大きく、65%の本命でも約35%は負ける。投資・賭博等の判断への使用は禁止します。本ページは2026-07-11（朝版）。先発・チーム成績は本更新時点のシーズン通算。試合開始時間はすべてET（東部時間）。
+    <span class="warn">【免責事項】</span> 本予測はAIによる統計的分析であり、<span class="warn">勝利を保証するものではありません。</span>野球の単一試合は分散が大きく、65%の本命でも約35%は負ける。投資・賭博等の判断への使用は禁止します。本ページは2026-07-11（最終分析版）。先発・チーム成績は本更新時点のシーズン通算。試合開始時間はすべてET（東部時間）。
   </div>
 
 </body>
